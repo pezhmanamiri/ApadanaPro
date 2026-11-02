@@ -32,76 +32,43 @@
                             <div class="product-gallery">
                                 <div class="swiper-container gallery-slider pb-md-0 pb-3">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/01.png"
-                                                data-large="./assets/images/gallery/01.png" class="zoom-image"
-                                                alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/02.png"
-                                                data-large="./assets/images/gallery/02.png" class="zoom-image"
-                                                alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/03.png"
-                                                data-large="./assets/images/gallery/03.png" class="zoom-image"
-                                                alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/04.png"
-                                                data-large="./assets/images/gallery/04.png" class="zoom-image"
-                                                alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/05.png"
-                                                data-large="./assets/images/gallery/05.png" class="zoom-image"
-                                                alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/06.png"
-                                                data-large="./assets/images/gallery/06.png" class="zoom-image"
-                                                alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/07.png"
-                                                data-large="./assets/images/gallery/07.png" class="zoom-image"
-                                                alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/08.png"
-                                                data-large="./assets/images/gallery/08.png" class="zoom-image"
-                                                alt="gallery item">
-                                        </div>
+
+                                        {% for item in product.images.all %}
+
+                                            <div class="swiper-slide">
+                                                <img src="{{ item.image.url }}"
+                                                     data-large="{{ item.image.url }}"
+                                                     class="zoom-image"
+                                                     alt="{{ item.alt_text|default:product.name }}">
+                                            </div>
+
+                                        {% empty %}
+
+                                            <div class="swiper-slide">
+                                                <div class="text-center p-4">
+                                                    تصویری برای این محصول ثبت نشده است.
+                                                </div>
+                                            </div>
+
+                                        {% endfor %}
+
                                     </div>
                                     <!-- Add Pagination -->
                                     <div class="swiper-pagination d-md-none"></div>
                                 </div>
                                 <div class="swiper-container gallery-slider-thumbs d-md-block d-none">
                                     <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/01.png" alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/02.png" alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/03.png" alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/04.png" alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/05.png" alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/06.png" alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/07.png" alt="gallery item">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="./assets/images/gallery/08.png" alt="gallery item">
-                                        </div>
+
+                                        {% for item in product.images.all %}
+
+                                            <div class="swiper-slide">
+                                                <img src="{{ item.image.url }}"
+                                                     alt="{{ item.alt_text|default:product.name }}">
+                                            </div>
+
+                                        {% endfor %}
+
+                                    </div>
                                     </div>
                                     <!-- Add Arrows -->
                                     <div class="swiper-button-next"></div>
@@ -135,12 +102,15 @@
                         </div>
                         <div class="col-xl-5 col-lg-4 col-md-6">
                             <div class="product-title mb-3">
-                                <h1>
-                                    گوشی موبایل سامسونگ مدل Galaxy A30s SM-A307FN/DS دو سیم کارت ظرفیت 32 گیگابایت
-                                </h1>
-                                <h1 class="product-title-en">
-                                    Samsung Galaxy A30s SM-A307FN/DS Dual SIM 32GB Mobile Phone
-                                </h1>
+                                <h1>{{ product.name }}</h1>
+                                <h1 class="product-title-en">{{ product.brand }}</h1>
+                            </div>
+
+                            <div class="d-block mb-2">
+                                <span class="font-weight-bold">برند:</span>
+                                <span class="link--with-border-bottom">
+                                    {{ product.brand|default:"ثبت نشده" }}
+                                </span>
                             </div>
                             <div class="d-block mb-2">
                                 <span class="font-weight-bold">برند:</span>
@@ -151,27 +121,28 @@
                                 <span>18 ماهه</span>
                             </div>
                             <div class="product-params-special">
-                                <ul data-title="ویژگی‌های محصول">
+                                <ul data-title="مشخصات محصول">
+
                                     <li>
-                                        <span>حافظه داخلی:</span>
-                                        <span>32 گیگابایت</span>
+                                        <span>کد کالا:</span>
+                                        <span>{{ product.sku }}</span>
                                     </li>
+
                                     <li>
-                                        <span>مقدار RAM: </span>
-                                        <span>3 گیگابایت</span>
+                                        <span>دسته‌بندی:</span>
+                                        <span>{{ product.category.name }}</span>
                                     </li>
+
                                     <li>
-                                        <span>اندازه:</span>
-                                        <span>6.4 اینچ</span>
+                                        <span>برند:</span>
+                                        <span>{{ product.brand|default:"ثبت نشده" }}</span>
                                     </li>
+
                                     <li>
-                                        <span>رزولوشن تصویر: </span>
-                                        <span>1560 × 720 پیکسل</span>
+                                        <span>موجودی:</span>
+                                        <span>{{ product.stock }}</span>
                                     </li>
-                                    <li>
-                                        <span>تعداد سيم کارت:</span>
-                                        <span>دو سیم کارت</span>
-                                    </li>
+
                                 </ul>
                             </div>
                             <div class="alert alert-warning">
