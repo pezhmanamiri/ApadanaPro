@@ -192,7 +192,9 @@
                         ورود و عضویت
                     </a> -->
                             <a href="#">
-                                جلال بهرامی راد
+                            <span>
+                        سلام    {{ request.user.first_name }}
+                            </span>
                                 <i class="fad fa-chevron-down text-sm mr-1"></i>
                             </a>
                             <ul class="dropdown--wrapper">
@@ -203,32 +205,44 @@
                                                 <img src="{% static '/images/avatar/avatar.png' %}" alt="">
                                             </span>
                                             <span class="header-profile-dropdown-user-info">
-                                                <p class="header-profile-dropdown-user-name">
-                                                    جلال بهرامی راد
-                                                </p>
-                                                <span class="header-profile-dropdown-user-profile-link">مشاهده حساب
+                                                <span>
+                                                    {% if request.user.is_authenticated %}
+                                                        {{ request.user.first_name }}
+                                                        </span>
+                                                        <span class="header-profile-dropdown-user-profile-link">مشاهده حساب
                                                     کاربری</span>
-                                            </span>
-                                        </span>
-                                        <span class="header-profile-dropdown-account">
+                                                        </span>
+                                                        </span>
+                                                        <span class="header-profile-dropdown-account">
                                             <span class="header-profile-dropdown-account-item">
                                                 <span class="header-profile-dropdown-account-item-title">اعتبار</span>
                                                 <span class="header-profile-dropdown-account-item-amount">
                                                     <span
-                                                        class="header-profile-dropdown-account-item-amount-number">7,500,000</span>
+                                                            class="header-profile-dropdown-account-item-amount-number">7,500,000</span>
                                                     تومان
                                                 </span>
                                             </span>
                                         </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="dropdown--btn-primary">وارد شوید</a>
-                                </li>
-                                <li>
-                                    <span>کاربر جدید هستید؟</span>
-                                    <a href="#" class="border-bottom-dt">ثبت نام</a>
-                                </li>
+                                            </a>
+                                            </li>
+                                            <form method="post" action="{% url 'logout' %}">
+                                                {% csrf_token %}
+                                                <button type="submit">
+                                                    خروج از حساب
+                                                </button>
+                                            </form>
+                                        {% else %}
+
+                                            <li>
+                                                <a href="{% url 'login' %}" class="dropdown--btn-primary">وارد
+                                                    شوید</a>
+                                            </li>
+                                            <li>
+                                                <span>کاربر جدید هستید؟</span>
+                                                <a href="{% url 'register' %}" class="border-bottom-dt">ثبت
+                                                    نام</a>
+                                            </li>
+                                        {% endif %}
                                 <hr>
                                 <li>
                                     <a href="#">
