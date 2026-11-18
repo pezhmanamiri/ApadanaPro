@@ -4,1203 +4,1225 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-{{ product.name }}
+    {{ product.name }}
 {% endblock %}
 
 {% block content %}
 
-        <!-- Page Content -->
-        <main class="page-content">
-            <div class="container">
-                <div class="row mb-1">
-                    <div class="col-12">
-                        <!-- breadcrumb -->
-                        <div class="breadcrumb mb-1">
-                            <nav>
-                                <a href="{% url 'home' %}">صفحه اصلی</a>
-                                <a href="{% url 'products' %}">فروشگاه</a>
-                                <a>{{ product.category.name }}</a>
-                                <a>{{ product.name }}</a>
-                            </nav>
+    <!-- Page Content -->
+    <main class="page-content">
+        <div class="container">
+            <div class="row mb-1">
+                <div class="col-12">
+                    <!-- breadcrumb -->
+                    <div class="breadcrumb mb-1">
+                        <nav>
+                            <a href="{% url 'home' %}">صفحه اصلی</a>
+                            <a href="{% url 'products' %}">فروشگاه</a>
+                            <a>{{ product.category.name }}</a>
+                            <a>{{ product.name }}</a>
+                        </nav>
+                    </div>
+                    <!-- end breadcrumb -->
+                </div>
+            </div>
+            <div class="product-detail shadow-around mb-5 py-5">
+                <div class="row mb-3 mx-0">
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-md-0 mb-3">
+                        <div class="product-gallery">
+                            <div class="swiper-container gallery-slider pb-md-0 pb-3">
+                                <div class="swiper-wrapper">
+
+                                    {% for item in product.images.all %}
+
+                                        <div class="swiper-slide">
+                                            <img src="{{ item.image.url }}"
+                                                 data-large="{{ item.image.url }}"
+                                                 class="zoom-image"
+                                                 alt="{{ item.alt_text|default:product.name }}">
+                                        </div>
+
+                                    {% empty %}
+
+                                        <div class="swiper-slide">
+                                            <div class="text-center p-4">
+                                                تصویری برای این محصول ثبت نشده است.
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+
+                                </div>
+                                <!-- Add Pagination -->
+                                <div class="swiper-pagination d-md-none"></div>
+                            </div>
+                            <div class="swiper-container gallery-slider-thumbs d-md-block d-none">
+                                <div class="swiper-wrapper">
+
+                                    {% for item in product.images.all %}
+
+                                        <div class="swiper-slide">
+                                            <img src="{{ item.image.url }}"
+                                                 alt="{{ item.alt_text|default:product.name }}">
+                                        </div>
+
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
                         </div>
-                        <!-- end breadcrumb -->
+                        <ul class="product--actions">
+                            <li>
+                                <form method="post"
+                                      action="{% url 'add_to_favorites' product.id %}">
+
+                                    {% csrf_token %}
+
+                                    <button type="submit"
+                                            class="product-box--action-btn product-box--action-wishlist">
+
+                                        <i class="fas fa-heart"></i>
+
+                                    </button>
+
+                                </form>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#shareLinkModal"><i
+                                        class="fas fa-share-alt"></i></a>
+                                <span class="tooltip--action">اشتراک گذاری</span>
+                            </li>
+                            <li>
+                                <a href="#" class="is-action add-to-compare"><i class="fas fa-adjust"></i></a>
+                                <span class="tooltip--action">افزودن به لیست مقایسه</span>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#chartModal"><i
+                                        class="fas fa-chart-area"></i></a>
+                                <span class="tooltip--action">نمودار قیمت</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="product-detail shadow-around mb-5 py-5">
-                    <div class="row mb-3 mx-0">
-                        <div class="col-xl-4 col-lg-4 col-md-6 mb-md-0 mb-3">
-                            <div class="product-gallery">
-                                <div class="swiper-container gallery-slider pb-md-0 pb-3">
-                                    <div class="swiper-wrapper">
+                <div class="col-xl-5 col-lg-4 col-md-6">
+                    <div class="product-title mb-3">
+                        <h1>{{ product.name }}</h1>
+                        <h1 class="product-title-en">{{ product.brand }}</h1>
+                    </div>
 
-                                        {% for item in product.images.all %}
-
-                                            <div class="swiper-slide">
-                                                <img src="{{ item.image.url }}"
-                                                     data-large="{{ item.image.url }}"
-                                                     class="zoom-image"
-                                                     alt="{{ item.alt_text|default:product.name }}">
-                                            </div>
-
-                                        {% empty %}
-
-                                            <div class="swiper-slide">
-                                                <div class="text-center p-4">
-                                                    تصویری برای این محصول ثبت نشده است.
-                                                </div>
-                                            </div>
-
-                                        {% endfor %}
-
-                                    </div>
-                                    <!-- Add Pagination -->
-                                    <div class="swiper-pagination d-md-none"></div>
-                                </div>
-                                <div class="swiper-container gallery-slider-thumbs d-md-block d-none">
-                                    <div class="swiper-wrapper">
-
-                                        {% for item in product.images.all %}
-
-                                            <div class="swiper-slide">
-                                                <img src="{{ item.image.url }}"
-                                                     alt="{{ item.alt_text|default:product.name }}">
-                                            </div>
-
-                                        {% endfor %}
-
-                                    </div>
-                                    </div>
-                                    <!-- Add Arrows -->
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                                <ul class="product--actions">
-                                    <li>
-                                        <!-- در صورت نیاز به استفاده از فرم از کد زیر استفاده کنید -->
-                                        <!-- <form action="">
-                                            <button class="add-to-favorite"><i class="fas fa-heart"></i></button>
-                                        </form> -->
-                                        <a href="#" class="is-action add-to-favorite"><i class="fas fa-heart"></i></a>
-                                        <span class="tooltip--action">افزودن به علاقمندی</span>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="modal" data-target="#shareLinkModal"><i
-                                                class="fas fa-share-alt"></i></a>
-                                        <span class="tooltip--action">اشتراک گذاری</span>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="is-action add-to-compare"><i class="fas fa-adjust"></i></a>
-                                        <span class="tooltip--action">افزودن به لیست مقایسه</span>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-toggle="modal" data-target="#chartModal"><i
-                                                class="fas fa-chart-area"></i></a>
-                                        <span class="tooltip--action">نمودار قیمت</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-lg-4 col-md-6">
-                            <div class="product-title mb-3">
-                                <h1>{{ product.name }}</h1>
-                                <h1 class="product-title-en">{{ product.brand }}</h1>
-                            </div>
-
-                            <div class="d-block mb-2">
-                                <span class="font-weight-bold">برند:</span>
-                                <span class="link--with-border-bottom">
+                    <div class="d-block mb-2">
+                        <span class="font-weight-bold">برند:</span>
+                        <span class="link--with-border-bottom">
                                     {{ product.brand|default:"ثبت نشده" }}
                                 </span>
-                            </div>
-                            <div class="d-block mb-2">
-                                <span class="font-weight-bold">برند:</span>
-                                <a href="#" class="link--with-border-bottom">سامسونگ</a>
-                            </div>
-                            <div class="d-block mb-4">
-                                <span class="font-weight-bold">گارانتی:</span>
-                                <span>18 ماهه</span>
-                            </div>
-                            <div class="product-params-special">
-                                <ul data-title="مشخصات محصول">
+                    </div>
+                    
+                    <div class="d-block mb-4">
+                        <span class="font-weight-bold">گارانتی:</span>
+                        <span>18 ماهه</span>
+                    </div>
+                    <div class="product-params-special">
+                        <ul data-title="مشخصات محصول">
 
-                                    <li>
-                                        <span>کد کالا:</span>
-                                        <span>{{ product.sku }}</span>
-                                    </li>
+                            <li>
+                                <span>کد کالا:</span>
+                                <span>{{ product.sku }}</span>
+                            </li>
 
-                                    <li>
-                                        <span>دسته‌بندی:</span>
-                                        <span>{{ product.category.name }}</span>
-                                    </li>
+                            <li>
+                                <span>دسته‌بندی:</span>
+                                <span>{{ product.category.name }}</span>
+                            </li>
 
-                                    <li>
-                                        <span>برند:</span>
-                                        <span>{{ product.brand|default:"ثبت نشده" }}</span>
-                                    </li>
+                            <li>
+                                <span>برند:</span>
+                                <span>{{ product.brand|default:"ثبت نشده" }}</span>
+                            </li>
 
-                                    <li>
-                                        <span>موجودی:</span>
-                                        <span>{{ product.stock }}</span>
-                                    </li>
+                            <li>
+                                <span>موجودی:</span>
+                                <span>{{ product.stock }}</span>
+                            </li>
 
-                                </ul>
-                            </div>
-                            <div class="alert alert-warning">
-                                <div class="alert-body">
-                                    <p class="d-flex align-items-center">
-                                        <i class="fad fa-history ml-2"></i>
-                                        حداکثر تا 3 روز تحویل داده می شود.
-                                    </p>
-                                </div>
-                            </div>
+                        </ul>
+                    </div>
+                    <div class="alert alert-warning">
+                        <div class="alert-body">
+                            <p class="d-flex align-items-center">
+                                <i class="fad fa-history ml-2"></i>
+                                حداکثر تا 5 روز تحویل داده می شود.
+                            </p>
                         </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 mx-lg-0 mx-auto">
-                            <div class="box-info-product">
-                                <div class="product-colors mb-3">
-                                    <span class="d-block mb-3">رنگ:</span>
-                                    <div class="input-radio-color">
-                                        <div class="input-radio-color__list">
-                                            <label class="input-radio-color__item input-radio-color__item--white"
-                                                style="color: #fff;">
-                                                <input type="radio" name="color"> <span></span></label>
-                                            <label class="input-radio-color__item" style="color: #ffd333;">
-                                                <input type="radio" name="color"> <span></span></label>
-                                            <label class="input-radio-color__item" style="color: #ff4040;">
-                                                <input type="radio" name="color"> <span></span></label>
-                                            <label class="input-radio-color__item input-radio-color__item--disabled"
-                                                style="color: #4080ff;">
-                                                <input type="radio" name="color" disabled=""> <span></span></label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-block mb-3">
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 mx-lg-0 mx-auto">
+                    <div class="box-info-product">
+{#                        <div class="product-colors mb-3">#}
+{#                            <span class="d-block mb-3">رنگ:</span>#}
+{#                            <div class="input-radio-color">#}
+{#                                <div class="input-radio-color__list">#}
+{#                                    <label class="input-radio-color__item input-radio-color__item--white"#}
+{#                                           style="color: #fff;">#}
+{#                                        <input type="radio" name="color"> <span></span></label>#}
+{#                                    <label class="input-radio-color__item" style="color: #ffd333;">#}
+{#                                        <input type="radio" name="color"> <span></span></label>#}
+{#                                    <label class="input-radio-color__item" style="color: #ff4040;">#}
+{#                                        <input type="radio" name="color"> <span></span></label>#}
+{#                                    <label class="input-radio-color__item input-radio-color__item--disabled"#}
+{#                                           style="color: #4080ff;">#}
+{#                                        <input type="radio" name="color" disabled=""> <span></span></label>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+                        <div class="d-block mb-3">
                                     <span class="d-block">
                                         تعداد:
                                     </span>
-                                    <div class="num-block">
-                                        <div class="num-in">
-                                            <span class="plus"></span>
-                                            <input type="text" class="in-num" value="1" readonly="">
-                                            <span class="minus dis"></span>
-                                        </div>
-                                    </div>
+                            <div class="num-block">
+                                <div class="num-in">
+                                    <span class="plus"></span>
+                                    <input type="text" class="in-num" value="1" readonly="">
+                                    <span class="minus dis"></span>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-end mt-3">
+                            <div class="product-price">
                                 <div class="d-flex align-items-center justify-content-end mt-3">
                                     <div class="product-price">
-                                        <div class="d-flex align-items-center justify-content-end mt-3">
-                                            <div class="product-price">
-                                                <div class="product-price-real">
-                                                    <div class="product-price-raw">
-                                                        {{ product.price }}
+                                        <div class="product-price-real">
+                                            <div class="product-price-raw">
+                                                {{ product.price }}
+                                            </div>
+                                            ریال
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <form method="post" action="{% url 'add_to_cart' product.id %}">
+                                {% csrf_token %}
+
+                                <div class="product-quantity">
+                                    <input
+                                            type="number"
+                                            name="quantity"
+                                            value="1"
+                                            min="1"
+                                            max="{{ product.stock }}"
+                                    >
+                                </div>
+
+                                {% if product.stock > 0 %}
+                                    <button type="submit" class="btn btn-danger">
+                                        افزودن به سبد خرید
+                                    </button>
+                                {% else %}
+                                    <button type="button" class="btn btn-secondary" disabled>
+                                        ناموجود
+                                    </button>
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="py-3">
+                <div class="row mx-0">
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="services pt-3 row mx-0">
+                <div class="col-md-3 col-sm-6 mb-md-0 mb-4">
+                    <div class="service-item">
+                        <img src="../assets/images/services/delivery-person.png" alt="">
+                        <div class="service-item-body">
+                            <h6>تحویل سریع و رایگان</h6>
+                            <p>تحویل رایگان کالا برای کلیه سفارشات بیش از 500 هزار تومان</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-md-0 mb-4">
+                    <div class="service-item">
+                        <img src="../assets/images/services/recieve.png" alt="">
+                        <div class="service-item-body">
+                            <h6>۷ روز ضمانت بازگشت</h6>
+                            <p>در صورت نارضایتی به هر دلیلی می توانید محصول را بازگردانید</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-md-0 mb-4">
+                    <div class="service-item">
+                        <img src="../assets/images/services/headset.png" alt="">
+                        <div class="service-item-body">
+                            <h6>پشتیبانی ۲۴ ساعته</h6>
+                            <p>در صورت وجود هرگونه سوال یا ابهامی، با ما در تماس باشید</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-md-0 mb-4">
+                    <div class="service-item">
+                        <img src="../assets/images/services/debit-card.png" alt="">
+                        <div class="service-item-body">
+                            <h6>پرداخت آنلاین ایمن</h6>
+                            <p>محصولات مدنظر خود را با خیال آسوده به صورت آنلاین خریداری کنید</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- sellers -->
+        <div class="product-sellers shadow-around mb-5">
+            <div class="product-seller">
+                <div class="product-seller-col">
+                    <div class="product-seller-title">
+                        <div class="icon">
+                            <i class="fas fa-store-alt"></i>
+                        </div>
+                        <div class="detail">
+                            <div class="name">همتا <span class="badge badge-light rounded-pill">برگزیده</span>
+                            </div>
+                            <div class="rating">
+                                <span class="value">۹۰.۲٪</span>
+                                <span class="label">رضایت خریداران</span>
+                                <span class="divider">|</span>
+                                <span class="label">عملکرد</span>
+                                <span class="value">عالی</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-seller-col">
+                    <div class="product-seller-conditions">
+                        <div class="product-seller-info">
+                            <i class="fad fa-truck-container"></i>
+                            <span>ارسال از همتا</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-seller-col">
+                    <div class="product-seller-guarantee">
+                        <div class="product-seller-info">
+                            <i class="fad fa-shield-check"></i>
+                            <span>گارانتی ۱۸ ماهه همتا</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-seller-col">
+                    <div class="product-seller-price-action">
+                        <div class="product-seller-price">۵,۵۵۰,۰۰۰<span class="currency">تومان</span></div>
+                        <div class="product-seller-action"><a href="#" class="btn btn-outline-danger">افزودن به
+                            سبد</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-seller">
+                <div class="product-seller-col">
+                    <div class="product-seller-title">
+                        <div class="icon">
+                            <i class="fas fa-store-alt"></i>
+                        </div>
+                        <div class="detail">
+                            <div class="name">همتا <span class="badge badge-light rounded-pill">برگزیده</span>
+                            </div>
+                            <div class="rating">
+                                <span class="value">۹۰.۲٪</span>
+                                <span class="label">رضایت خریداران</span>
+                                <span class="divider">|</span>
+                                <span class="label">عملکرد</span>
+                                <span class="value">عالی</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-seller-col">
+                    <div class="product-seller-conditions">
+                        <div class="product-seller-info">
+                            <i class="fad fa-truck-container"></i>
+                            <span>ارسال از همتا</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-seller-col">
+                    <div class="product-seller-guarantee">
+                        <div class="product-seller-info">
+                            <i class="fad fa-shield-check"></i>
+                            <span>گارانتی ۱۸ ماهه همتا</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-seller-col">
+                    <div class="product-seller-price-action">
+                        <div class="product-seller-price">۵,۵۵۰,۰۰۰<span class="currency">تومان</span></div>
+                        <div class="product-seller-action"><a href="#" class="btn btn-outline-danger">افزودن به
+                            سبد</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end sellers -->
+        <!-- product-tab-content -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="product-tab-content">
+                    <ul class="nav nav-tabs" id="product-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="productDescription-tab" data-toggle="tab"
+                               href="#productDescription" role="tab" aria-controls="productDescription"
+                               aria-selected="true">توضیحات</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="productParams-tab" data-toggle="tab" href="#productParams"
+                               role="tab" aria-controls="productParams" aria-selected="false">مشخصات فنی</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="productComments-tab" data-toggle="tab"
+                               href="#productComments" role="tab" aria-controls="productComments"
+                               aria-selected="false">نظرات</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="product-tab">
+                        <div class="tab-pane fade show active" id="productDescription" role="tabpanel"
+                             aria-labelledby="productDescription-tab">
+                            <div class="product-desc">
+                                <div class="accordion accordion-product" id="accordionDescription">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h5 class="mb-0">
+                                                <button class="btn" type="button" data-toggle="collapse"
+                                                        data-target="#collapseOne" aria-expanded="true"
+                                                        aria-controls="collapseOne">
+                                                    گلکسی سری A
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div class="tab-pane fade show active"
+                                             id="productDescription"
+                                             role="tabpanel"
+                                             aria-labelledby="productDescription-tab">
+
+                                            <div class="product-desc">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        {% if product.description %}
+                                                            {{ product.description|linebreaks }}
+                                                        {% else %}
+                                                            توضیحاتی برای این محصول ثبت نشده است.
+                                                        {% endif %}
                                                     </div>
-                                                    ریال
                                                 </div>
                                             </div>
+
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <form method="post" action="{% url 'add_to_cart' product.id %}">
-                                        {% csrf_token %}
-
-                                        <div class="product-quantity">
-                                            <input
-                                                    type="number"
-                                                    name="quantity"
-                                                    value="1"
-                                                    min="1"
-                                                    max="{{ product.stock }}"
-                                            >
-                                        </div>
-
-                                        {% if product.stock > 0 %}
-                                            <button type="submit" class="btn btn-danger">
-                                                افزودن به سبد خرید
-                                            </button>
-                                        {% else %}
-                                            <button type="button" class="btn btn-secondary" disabled>
-                                                ناموجود
-                                            </button>
-                                        {% endif %}
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="py-3">
-                        <div class="row mx-0">
-                            <div class="col-12">
-                                <hr>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="services pt-3 row mx-0">
-                        <div class="col-md-3 col-sm-6 mb-md-0 mb-4">
-                            <div class="service-item">
-                                <img src="../assets/images/services/delivery-person.png" alt="">
-                                <div class="service-item-body">
-                                    <h6>تحویل سریع و رایگان</h6>
-                                    <p>تحویل رایگان کالا برای کلیه سفارشات بیش از 500 هزار تومان</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 mb-md-0 mb-4">
-                            <div class="service-item">
-                                <img src="../assets/images/services/recieve.png" alt="">
-                                <div class="service-item-body">
-                                    <h6>۷ روز ضمانت بازگشت</h6>
-                                    <p>در صورت نارضایتی به هر دلیلی می توانید محصول را بازگردانید</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 mb-md-0 mb-4">
-                            <div class="service-item">
-                                <img src="../assets/images/services/headset.png" alt="">
-                                <div class="service-item-body">
-                                    <h6>پشتیبانی ۲۴ ساعته</h6>
-                                    <p>در صورت وجود هرگونه سوال یا ابهامی، با ما در تماس باشید</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 mb-md-0 mb-4">
-                            <div class="service-item">
-                                <img src="../assets/images/services/debit-card.png" alt="">
-                                <div class="service-item-body">
-                                    <h6>پرداخت آنلاین ایمن</h6>
-                                    <p>محصولات مدنظر خود را با خیال آسوده به صورت آنلاین خریداری کنید</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- sellers -->
-                <div class="product-sellers shadow-around mb-5">
-                    <div class="product-seller">
-                        <div class="product-seller-col">
-                            <div class="product-seller-title">
-                                <div class="icon">
-                                    <i class="fas fa-store-alt"></i>
-                                </div>
-                                <div class="detail">
-                                    <div class="name">همتا <span class="badge badge-light rounded-pill">برگزیده</span>
-                                    </div>
-                                    <div class="rating">
-                                        <span class="value">۹۰.۲٪</span>
-                                        <span class="label">رضایت خریداران</span>
-                                        <span class="divider">|</span>
-                                        <span class="label">عملکرد</span>
-                                        <span class="value">عالی</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-seller-col">
-                            <div class="product-seller-conditions">
-                                <div class="product-seller-info">
-                                    <i class="fad fa-truck-container"></i>
-                                    <span>ارسال از همتا</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-seller-col">
-                            <div class="product-seller-guarantee">
-                                <div class="product-seller-info">
-                                    <i class="fad fa-shield-check"></i>
-                                    <span>گارانتی ۱۸ ماهه همتا</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-seller-col">
-                            <div class="product-seller-price-action">
-                                <div class="product-seller-price">۵,۵۵۰,۰۰۰<span class="currency">تومان</span></div>
-                                <div class="product-seller-action"><a href="#" class="btn btn-outline-danger">افزودن به
-                                        سبد</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product-seller">
-                        <div class="product-seller-col">
-                            <div class="product-seller-title">
-                                <div class="icon">
-                                    <i class="fas fa-store-alt"></i>
-                                </div>
-                                <div class="detail">
-                                    <div class="name">همتا <span class="badge badge-light rounded-pill">برگزیده</span>
-                                    </div>
-                                    <div class="rating">
-                                        <span class="value">۹۰.۲٪</span>
-                                        <span class="label">رضایت خریداران</span>
-                                        <span class="divider">|</span>
-                                        <span class="label">عملکرد</span>
-                                        <span class="value">عالی</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-seller-col">
-                            <div class="product-seller-conditions">
-                                <div class="product-seller-info">
-                                    <i class="fad fa-truck-container"></i>
-                                    <span>ارسال از همتا</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-seller-col">
-                            <div class="product-seller-guarantee">
-                                <div class="product-seller-info">
-                                    <i class="fad fa-shield-check"></i>
-                                    <span>گارانتی ۱۸ ماهه همتا</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-seller-col">
-                            <div class="product-seller-price-action">
-                                <div class="product-seller-price">۵,۵۵۰,۰۰۰<span class="currency">تومان</span></div>
-                                <div class="product-seller-action"><a href="#" class="btn btn-outline-danger">افزودن به
-                                        سبد</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end sellers -->
-                <!-- product-tab-content -->
-                <div class="row mb-5">
-                    <div class="col-12">
-                        <div class="product-tab-content">
-                            <ul class="nav nav-tabs" id="product-tab" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="productDescription-tab" data-toggle="tab"
-                                        href="#productDescription" role="tab" aria-controls="productDescription"
-                                        aria-selected="true">توضیحات</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="productParams-tab" data-toggle="tab" href="#productParams"
-                                        role="tab" aria-controls="productParams" aria-selected="false">مشخصات فنی</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="productComments-tab" data-toggle="tab"
-                                        href="#productComments" role="tab" aria-controls="productComments"
-                                        aria-selected="false">نظرات</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="product-tab">
-                                <div class="tab-pane fade show active" id="productDescription" role="tabpanel"
-                                    aria-labelledby="productDescription-tab">
-                                    <div class="product-desc">
-                                        <div class="accordion accordion-product" id="accordionDescription">
-                                            <div class="card">
-                                                <div class="card-header" id="headingOne">
-                                                    <h5 class="mb-0">
-                                                        <button class="btn" type="button" data-toggle="collapse"
-                                                            data-target="#collapseOne" aria-expanded="true"
-                                                            aria-controls="collapseOne">
-                                                            گلکسی سری A
-                                                        </button>
-                                                    </h5>
-                                                </div>
-
-                                                <div class="tab-pane fade show active"
-                                                     id="productDescription"
-                                                     role="tabpanel"
-                                                     aria-labelledby="productDescription-tab">
-
-                                                    <div class="product-desc">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                {% if product.description %}
-                                                                    {{ product.description|linebreaks }}
-                                                                {% else %}
-                                                                    توضیحاتی برای این محصول ثبت نشده است.
-                                                                {% endif %}
+                                        <!-- product-review -->
+                                        <div class="product-review-form mb-3">
+                                            <form action="#">
+                                                <div class="row align-items-center">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-element-row">
+                                                            <label for="phone-number" class="label-element">عنوان نظر
+                                                                شما
+                                                                (اجباری)</label>
+                                                            <input type="text" class="input-element">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label>امتیاز شما:</label>
+                                                            <div class="add-rating">
+                                                                <input type="radio" name="rating" id="rating-1">
+                                                                <label for="rating-1"></label>
+                                                                <input type="radio" name="rating" id="rating-2">
+                                                                <label for="rating-2"></label>
+                                                                <input type="radio" name="rating" id="rating-3">
+                                                                <label for="rating-3"></label>
+                                                                <input type="radio" name="rating" id="rating-4">
+                                                                <label for="rating-4"></label>
+                                                                <input type="radio" name="rating" id="rating-5">
+                                                                <label for="rating-5"></label>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-element-row">
+                                                            <label for="phone-number" class="label-element">ایمیل
+                                                                شما</label>
+                                                            <input type="text" class="input-element">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-element-row">
+                                                            <label for="phone-number" class="label-element">نظر
+                                                                شما</label>
+                                                            <textarea name="comment" id="comment" cols="30" rows="10"
+                                                                      class="input-element"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <button class="btn btn-primary px-3">ارسال نظر <i
+                                                                    class="fad fa-comment-alt-edit"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="section-title mb-1 mt-4">
+                                                نظرات کاربران (۵)
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <div class="comments-list">
+                                            <div class="row">
+                                                <div class="col-md-3 aside">
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-name">
+                                                                کاربر اینجانب
+                                                            </div>
+                                                            <div class="comments-buyer-badge">خریدار</div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell">
+                                                                در تاریخ ۷ فروردین ۱۳۹۹
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="alert alert-info">
+                                                        <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
+                                                    </div>
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-title">رنگ:</div>
+                                                            <div class="cell color-cell">
+                                                            <span class="shopping-color-value"
+                                                                  style="background-color: #FFFFFF;"></span>سفید
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell cell-title">فروشنده:</div>
+                                                            <div class="cell seller-cell">
+                                                                <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-9 article">
+                                                    <div class="header">
+                                                        <div>راضیم</div>
+                                                    </div>
+                                                    <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
+                                                        زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
+                                                        شارژش می‌کنم گوشیه خوش دستیه</p>
+                                                    <div class="footer">
+                                                        <div class="comments-likes">
+                                                            آیا این نظر برایتان مفید بود؟
+                                                            <button class="btn-like" data-counter="۰">بله</button>
+                                                            <button class="btn-like" data-counter="۰">خیر</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 aside">
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-name">
+                                                                کاربر اینجانب
+                                                            </div>
+                                                            <div class="comments-buyer-badge">خریدار</div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell">
+                                                                در تاریخ ۷ فروردین ۱۳۹۹
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="alert alert-info">
+                                                        <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
+                                                    </div>
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-title">رنگ:</div>
+                                                            <div class="cell color-cell">
+                                                            <span class="shopping-color-value"
+                                                                  style="background-color: #000000;"></span>مشکی
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell cell-title">فروشنده:</div>
+                                                            <div class="cell seller-cell">
+                                                                <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-9 article">
+                                                    <div class="header">
+                                                        <div>مدل 128 گیگ با رام 4 پیشنهاد میشه</div>
+                                                    </div>
+                                                    <p>سلام بعد از چند روز استفاده ازش راضی هستم و فکرشو نمیکردم به
+                                                        عنوان یه گوشی تقریبا میان رده راضیم کنه و تصورم یه گوشیه
+                                                        ضعیف بود.به عنوان کسی که زیاد با کامپیوتر و گوشی سر و کار
+                                                        داره و سرعت و امکانات براش مهمه کاملا توقعاتمو برآروده
+                                                        کرد.طراحی به روز و جذابی هم داره.رنگ مشکی 128 گیگ با رام 4
+                                                        رو گرفتم که زیبایی خاصی داره.از دیجیکالا هم تشکر میکنم که
+                                                        محصولو به موقع در تعطیلات به دستم رسوند و گارانتی و برگه
+                                                        نحوه رجستر کردن گوشی همراهش بود و بسته بندی خوبی
+                                                        داشت.دوستانی هم که میگفتن مشکل هنگ داره بنده مشاهده نکردم و
+                                                        قبل استفاده کاملا بروزرسانیش کردم اول.نکته آخر اینکه برای
+                                                        اینکه عمر باتری بیشتر باشه تو تنظیمات از حالت فست شارژ خارج
+                                                        کنید و استاندارد شارژ کنید بهتره و مواقع اضطراری از فست
+                                                        استفاده کنید و برای اولین بار بگذارید شارژ گوشی به پانزده
+                                                        درصد برسه و خالی بشه بعد بزنید به شارژ و ازش استفاده نکنید
+                                                        تا فول بشه و بعد استفاده کنید.گوشی های هوشمند نیازی به شارژ
+                                                        طولانی مدت ندارند.</p>
+                                                    <div class="comments-evaluation">
+                                                        <div class="comments-evaluation-positive">
+                                                            <span>نقاط قوت</span>
+                                                            <ul>
+                                                                <li>فینگر تاچ عالی نیست ولی رضایت بخشه.تاچ قوی داره
+                                                                </li>
+                                                                <li>نور صفحه نمایش زیاد و کیفت صفحه نمایش قابل قبوله
+                                                                </li>
+                                                                <li>سخت افزار مناسب و سرعت خوب
+                                                                </li>
+                                                                <li>داشتن کاور ژله ای شفاف همراه گوشی و صدای واضح و
+                                                                    بلند
+                                                                </li>
+                                                                <li>میزان شارژ دهی مناسب و دوربین سلفی خوب</li>
+                                                            </ul>
+                                                        </div>
 
-                                                </div>
-                                    <!-- product-review -->
-                                    <div class="product-review-form mb-3">
-                                        <form action="#">
-                                            <div class="row align-items-center">
-                                                <div class="col-lg-6">
-                                                    <div class="form-element-row">
-                                                        <label for="phone-number" class="label-element">عنوان نظر شما
-                                                            (اجباری)</label>
-                                                        <input type="text" class="input-element">
+                                                        <div class="comments-evaluation-negative">
+                                                            <span>نقاط ضعف</span>
+                                                            <ul>
+                                                                <li>نداشتن گلاس صفحه
+                                                                </li>
+                                                                <li>سیم شارژر خیلی کوتاهه</li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>امتیاز شما:</label>
-                                                        <div class="add-rating">
-                                                            <input type="radio" name="rating" id="rating-1">
-                                                            <label for="rating-1"></label>
-                                                            <input type="radio" name="rating" id="rating-2">
-                                                            <label for="rating-2"></label>
-                                                            <input type="radio" name="rating" id="rating-3">
-                                                            <label for="rating-3"></label>
-                                                            <input type="radio" name="rating" id="rating-4">
-                                                            <label for="rating-4"></label>
-                                                            <input type="radio" name="rating" id="rating-5">
-                                                            <label for="rating-5"></label>
+                                                    <div class="footer">
+                                                        <div class="comments-likes">
+                                                            آیا این نظر برایتان مفید بود؟
+                                                            <button class="btn-like" data-counter="۰">بله</button>
+                                                            <button class="btn-like" data-counter="۰">خیر</button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-element-row">
-                                                        <label for="phone-number" class="label-element">ایمیل
-                                                            شما</label>
-                                                        <input type="text" class="input-element">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 aside">
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-name">
+                                                                کاربر اینجانب
+                                                            </div>
+                                                            <div class="comments-buyer-badge">خریدار</div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell">
+                                                                در تاریخ ۷ فروردین ۱۳۹۹
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="alert alert-info">
+                                                        <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
                                                     </div>
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-title">رنگ:</div>
+                                                            <div class="cell color-cell">
+                                                            <span class="shopping-color-value"
+                                                                  style="background-color: #FFFFFF;"></span>سفید
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell cell-title">فروشنده:</div>
+                                                            <div class="cell seller-cell">
+                                                                <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                                <div class="col-12">
-                                                    <div class="form-element-row">
-                                                        <label for="phone-number" class="label-element">نظر شما</label>
-                                                        <textarea name="comment" id="comment" cols="30" rows="10"
-                                                            class="input-element"></textarea>
+                                                <div class="col-md-9 article">
+                                                    <div class="header">
+                                                        <div>راضیم</div>
                                                     </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <button class="btn btn-primary px-3">ارسال نظر <i
-                                                                class="fad fa-comment-alt-edit"></i></button>
+                                                    <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
+                                                        زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
+                                                        شارژش می‌کنم گوشیه خوش دستیه</p>
+                                                    <div class="footer">
+                                                        <div class="comments-likes">
+                                                            آیا این نظر برایتان مفید بود؟
+                                                            <button class="btn-like" data-counter="۰">بله</button>
+                                                            <button class="btn-like" data-counter="۰">خیر</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                        <div class="section-title mb-1 mt-4">
-                                            نظرات کاربران (۵)
+                                            <div class="row">
+                                                <div class="col-md-3 aside">
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-name">
+                                                                کاربر اینجانب
+                                                            </div>
+                                                            <div class="comments-buyer-badge">خریدار</div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell">
+                                                                در تاریخ ۷ فروردین ۱۳۹۹
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="alert alert-info">
+                                                        <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
+                                                    </div>
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-title">رنگ:</div>
+                                                            <div class="cell color-cell">
+                                                            <span class="shopping-color-value"
+                                                                  style="background-color: #FFFFFF;"></span>سفید
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell cell-title">فروشنده:</div>
+                                                            <div class="cell seller-cell">
+                                                                <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-9 article">
+                                                    <div class="header">
+                                                        <div>راضیم</div>
+                                                    </div>
+                                                    <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
+                                                        زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
+                                                        شارژش می‌کنم گوشیه خوش دستیه</p>
+                                                    <div class="footer">
+                                                        <div class="comments-likes">
+                                                            آیا این نظر برایتان مفید بود؟
+                                                            <button class="btn-like" data-counter="۰">بله</button>
+                                                            <button class="btn-like" data-counter="۰">خیر</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 aside">
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-name">
+                                                                کاربر اینجانب
+                                                            </div>
+                                                            <div class="comments-buyer-badge">خریدار</div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell">
+                                                                در تاریخ ۷ فروردین ۱۳۹۹
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="alert alert-info">
+                                                        <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
+                                                    </div>
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-title">رنگ:</div>
+                                                            <div class="cell color-cell">
+                                                            <span class="shopping-color-value"
+                                                                  style="background-color: #FFFFFF;"></span>سفید
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell cell-title">فروشنده:</div>
+                                                            <div class="cell seller-cell">
+                                                                <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-9 article">
+                                                    <div class="header">
+                                                        <div>راضیم</div>
+                                                    </div>
+                                                    <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
+                                                        زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
+                                                        شارژش می‌کنم گوشیه خوش دستیه</p>
+                                                    <div class="footer">
+                                                        <div class="comments-likes">
+                                                            آیا این نظر برایتان مفید بود؟
+                                                            <button class="btn-like" data-counter="۰">بله</button>
+                                                            <button class="btn-like" data-counter="۰">خیر</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 aside">
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-name">
+                                                                کاربر اینجانب
+                                                            </div>
+                                                            <div class="comments-buyer-badge">خریدار</div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell">
+                                                                در تاریخ ۷ فروردین ۱۳۹۹
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="alert alert-danger">
+                                                        <i class="fas fa-thumbs-down"></i> خرید این محصول را توصیه
+                                                        نمی‌کنم
+                                                    </div>
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-title">رنگ:</div>
+                                                            <div class="cell color-cell">
+                                                            <span class="shopping-color-value"
+                                                                  style="background-color: #FFFFFF;"></span>سفید
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell cell-title">فروشنده:</div>
+                                                            <div class="cell seller-cell">
+                                                                <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-9 article">
+                                                    <div class="header">
+                                                        <div>راضیم</div>
+                                                    </div>
+                                                    <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
+                                                        زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
+                                                        شارژش می‌کنم گوشیه خوش دستیه</p>
+                                                    <div class="footer">
+                                                        <div class="comments-likes">
+                                                            آیا این نظر برایتان مفید بود؟
+                                                            <button class="btn-like" data-counter="۰">بله</button>
+                                                            <button class="btn-like" data-counter="۰">خیر</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 aside">
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-name">
+                                                                کاربر اینجانب
+                                                            </div>
+                                                            <div class="comments-buyer-badge">خریدار</div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell">
+                                                                در تاریخ ۷ فروردین ۱۳۹۹
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="alert alert-info">
+                                                        <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
+                                                    </div>
+                                                    <ul class="comments-user-shopping">
+                                                        <li>
+                                                            <div class="cell cell-title">رنگ:</div>
+                                                            <div class="cell color-cell">
+                                                            <span class="shopping-color-value"
+                                                                  style="background-color: #FFFFFF;"></span>سفید
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="cell cell-title">فروشنده:</div>
+                                                            <div class="cell seller-cell">
+                                                                <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-9 article">
+                                                    <div class="header">
+                                                        <div>راضیم</div>
+                                                    </div>
+                                                    <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
+                                                        زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
+                                                        شارژش می‌کنم گوشیه خوش دستیه</p>
+                                                    <div class="footer">
+                                                        <div class="comments-likes">
+                                                            آیا این نظر برایتان مفید بود؟
+                                                            <button class="btn-like" data-counter="۰">بله</button>
+                                                            <button class="btn-like" data-counter="۰">خیر</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <hr>
+                                        <!-- end product-review -->
                                     </div>
-                                    <div class="comments-list">
-                                        <div class="row">
-                                            <div class="col-md-3 aside">
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-name">
-                                                            کاربر اینجانب
-                                                        </div>
-                                                        <div class="comments-buyer-badge">خریدار</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell">
-                                                            در تاریخ ۷ فروردین ۱۳۹۹
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="alert alert-info">
-                                                    <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
-                                                </div>
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-title">رنگ:</div>
-                                                        <div class="cell color-cell">
-                                                            <span class="shopping-color-value"
-                                                                style="background-color: #FFFFFF;"></span>سفید
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell cell-title">فروشنده:</div>
-                                                        <div class="cell seller-cell">
-                                                            <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-9 article">
-                                                <div class="header">
-                                                    <div>راضیم</div>
-                                                </div>
-                                                <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
-                                                    زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
-                                                    شارژش می‌کنم گوشیه خوش دستیه</p>
-                                                <div class="footer">
-                                                    <div class="comments-likes">
-                                                        آیا این نظر برایتان مفید بود؟
-                                                        <button class="btn-like" data-counter="۰">بله</button>
-                                                        <button class="btn-like" data-counter="۰">خیر</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3 aside">
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-name">
-                                                            کاربر اینجانب
-                                                        </div>
-                                                        <div class="comments-buyer-badge">خریدار</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell">
-                                                            در تاریخ ۷ فروردین ۱۳۹۹
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="alert alert-info">
-                                                    <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
-                                                </div>
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-title">رنگ:</div>
-                                                        <div class="cell color-cell">
-                                                            <span class="shopping-color-value"
-                                                                style="background-color: #000000;"></span>مشکی
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell cell-title">فروشنده:</div>
-                                                        <div class="cell seller-cell">
-                                                            <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-9 article">
-                                                <div class="header">
-                                                    <div>مدل 128 گیگ با رام 4 پیشنهاد میشه</div>
-                                                </div>
-                                                <p>سلام بعد از چند روز استفاده ازش راضی هستم و فکرشو نمیکردم به
-                                                    عنوان یه گوشی تقریبا میان رده راضیم کنه و تصورم یه گوشیه
-                                                    ضعیف بود.به عنوان کسی که زیاد با کامپیوتر و گوشی سر و کار
-                                                    داره و سرعت و امکانات براش مهمه کاملا توقعاتمو برآروده
-                                                    کرد.طراحی به روز و جذابی هم داره.رنگ مشکی 128 گیگ با رام 4
-                                                    رو گرفتم که زیبایی خاصی داره.از دیجیکالا هم تشکر میکنم که
-                                                    محصولو به موقع در تعطیلات به دستم رسوند و گارانتی و برگه
-                                                    نحوه رجستر کردن گوشی همراهش بود و بسته بندی خوبی
-                                                    داشت.دوستانی هم که میگفتن مشکل هنگ داره بنده مشاهده نکردم و
-                                                    قبل استفاده کاملا بروزرسانیش کردم اول.نکته آخر اینکه برای
-                                                    اینکه عمر باتری بیشتر باشه تو تنظیمات از حالت فست شارژ خارج
-                                                    کنید و استاندارد شارژ کنید بهتره و مواقع اضطراری از فست
-                                                    استفاده کنید و برای اولین بار بگذارید شارژ گوشی به پانزده
-                                                    درصد برسه و خالی بشه بعد بزنید به شارژ و ازش استفاده نکنید
-                                                    تا فول بشه و بعد استفاده کنید.گوشی های هوشمند نیازی به شارژ
-                                                    طولانی مدت ندارند.</p>
-                                                <div class="comments-evaluation">
-                                                    <div class="comments-evaluation-positive">
-                                                        <span>نقاط قوت</span>
-                                                        <ul>
-                                                            <li>فینگر تاچ عالی نیست ولی رضایت بخشه.تاچ قوی داره
-                                                            </li>
-                                                            <li>نور صفحه نمایش زیاد و کیفت صفحه نمایش قابل قبوله
-                                                            </li>
-                                                            <li>سخت افزار مناسب و سرعت خوب
-                                                            </li>
-                                                            <li>داشتن کاور ژله ای شفاف همراه گوشی و صدای واضح و
-                                                                بلند
-                                                            </li>
-                                                            <li>میزان شارژ دهی مناسب و دوربین سلفی خوب</li>
-                                                        </ul>
-                                                    </div>
-
-                                                    <div class="comments-evaluation-negative">
-                                                        <span>نقاط ضعف</span>
-                                                        <ul>
-                                                            <li>نداشتن گلاس صفحه
-                                                            </li>
-                                                            <li>سیم شارژر خیلی کوتاهه</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="footer">
-                                                    <div class="comments-likes">
-                                                        آیا این نظر برایتان مفید بود؟
-                                                        <button class="btn-like" data-counter="۰">بله</button>
-                                                        <button class="btn-like" data-counter="۰">خیر</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3 aside">
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-name">
-                                                            کاربر اینجانب
-                                                        </div>
-                                                        <div class="comments-buyer-badge">خریدار</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell">
-                                                            در تاریخ ۷ فروردین ۱۳۹۹
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="alert alert-info">
-                                                    <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
-                                                </div>
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-title">رنگ:</div>
-                                                        <div class="cell color-cell">
-                                                            <span class="shopping-color-value"
-                                                                style="background-color: #FFFFFF;"></span>سفید
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell cell-title">فروشنده:</div>
-                                                        <div class="cell seller-cell">
-                                                            <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-9 article">
-                                                <div class="header">
-                                                    <div>راضیم</div>
-                                                </div>
-                                                <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
-                                                    زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
-                                                    شارژش می‌کنم گوشیه خوش دستیه</p>
-                                                <div class="footer">
-                                                    <div class="comments-likes">
-                                                        آیا این نظر برایتان مفید بود؟
-                                                        <button class="btn-like" data-counter="۰">بله</button>
-                                                        <button class="btn-like" data-counter="۰">خیر</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3 aside">
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-name">
-                                                            کاربر اینجانب
-                                                        </div>
-                                                        <div class="comments-buyer-badge">خریدار</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell">
-                                                            در تاریخ ۷ فروردین ۱۳۹۹
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="alert alert-info">
-                                                    <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
-                                                </div>
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-title">رنگ:</div>
-                                                        <div class="cell color-cell">
-                                                            <span class="shopping-color-value"
-                                                                style="background-color: #FFFFFF;"></span>سفید
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell cell-title">فروشنده:</div>
-                                                        <div class="cell seller-cell">
-                                                            <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-9 article">
-                                                <div class="header">
-                                                    <div>راضیم</div>
-                                                </div>
-                                                <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
-                                                    زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
-                                                    شارژش می‌کنم گوشیه خوش دستیه</p>
-                                                <div class="footer">
-                                                    <div class="comments-likes">
-                                                        آیا این نظر برایتان مفید بود؟
-                                                        <button class="btn-like" data-counter="۰">بله</button>
-                                                        <button class="btn-like" data-counter="۰">خیر</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3 aside">
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-name">
-                                                            کاربر اینجانب
-                                                        </div>
-                                                        <div class="comments-buyer-badge">خریدار</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell">
-                                                            در تاریخ ۷ فروردین ۱۳۹۹
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="alert alert-info">
-                                                    <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
-                                                </div>
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-title">رنگ:</div>
-                                                        <div class="cell color-cell">
-                                                            <span class="shopping-color-value"
-                                                                style="background-color: #FFFFFF;"></span>سفید
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell cell-title">فروشنده:</div>
-                                                        <div class="cell seller-cell">
-                                                            <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-9 article">
-                                                <div class="header">
-                                                    <div>راضیم</div>
-                                                </div>
-                                                <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
-                                                    زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
-                                                    شارژش می‌کنم گوشیه خوش دستیه</p>
-                                                <div class="footer">
-                                                    <div class="comments-likes">
-                                                        آیا این نظر برایتان مفید بود؟
-                                                        <button class="btn-like" data-counter="۰">بله</button>
-                                                        <button class="btn-like" data-counter="۰">خیر</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3 aside">
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-name">
-                                                            کاربر اینجانب
-                                                        </div>
-                                                        <div class="comments-buyer-badge">خریدار</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell">
-                                                            در تاریخ ۷ فروردین ۱۳۹۹
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="alert alert-danger">
-                                                    <i class="fas fa-thumbs-down"></i> خرید این محصول را توصیه نمی‌کنم
-                                                </div>
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-title">رنگ:</div>
-                                                        <div class="cell color-cell">
-                                                            <span class="shopping-color-value"
-                                                                style="background-color: #FFFFFF;"></span>سفید
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell cell-title">فروشنده:</div>
-                                                        <div class="cell seller-cell">
-                                                            <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-9 article">
-                                                <div class="header">
-                                                    <div>راضیم</div>
-                                                </div>
-                                                <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
-                                                    زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
-                                                    شارژش می‌کنم گوشیه خوش دستیه</p>
-                                                <div class="footer">
-                                                    <div class="comments-likes">
-                                                        آیا این نظر برایتان مفید بود؟
-                                                        <button class="btn-like" data-counter="۰">بله</button>
-                                                        <button class="btn-like" data-counter="۰">خیر</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3 aside">
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-name">
-                                                            کاربر اینجانب
-                                                        </div>
-                                                        <div class="comments-buyer-badge">خریدار</div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell">
-                                                            در تاریخ ۷ فروردین ۱۳۹۹
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <div class="alert alert-info">
-                                                    <i class="fas fa-thumbs-up"></i> خرید این محصول را توصیه می‌کنم
-                                                </div>
-                                                <ul class="comments-user-shopping">
-                                                    <li>
-                                                        <div class="cell cell-title">رنگ:</div>
-                                                        <div class="cell color-cell">
-                                                            <span class="shopping-color-value"
-                                                                style="background-color: #FFFFFF;"></span>سفید
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="cell cell-title">فروشنده:</div>
-                                                        <div class="cell seller-cell">
-                                                            <a href="#" class="border-bottom-dt">زندگیِ مدرن</a>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-9 article">
-                                                <div class="header">
-                                                    <div>راضیم</div>
-                                                </div>
-                                                <p>من ۳روز که خریدم و راضی هستم دوربینش خوبه فقط به نظرم باتری
-                                                    زود تموم میشه البته دائما هم باهاش کار میکنم ولی هر روز
-                                                    شارژش می‌کنم گوشیه خوش دستیه</p>
-                                                <div class="footer">
-                                                    <div class="comments-likes">
-                                                        آیا این نظر برایتان مفید بود؟
-                                                        <button class="btn-like" data-counter="۰">بله</button>
-                                                        <button class="btn-like" data-counter="۰">خیر</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end product-review -->
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- end product-tab-content -->
-                <section class="product-carousel">
-                    <div class="section-title">
-                        <i class="fad fa-retweet"></i>
-                        پیشنهادهای مشابه
-                    </div>
-                    <div class="swiper-container slider-lg pb-0">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/05.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل آنر مدل 50 Lite دو سیم
+                    <!-- end product-tab-content -->
+                    <section class="product-carousel">
+                        <div class="section-title">
+                            <i class="fad fa-retweet"></i>
+                            پیشنهادهای مشابه
+                        </div>
+                        <div class="swiper-container slider-lg pb-0">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="product-box">
+                                        <div class="product-box--thumbnail-container">
+                                            <span class="product-box--specialSell"></span>
+                                            <img src="{% static '/images/products/05.jpg' %}"
+                                                 class="product-box--thumbnail"
+                                                 alt="product title">
+                                            <a href="#" class="product-box--link"></a>
+                                        </div>
+                                        <div class="product-box--detail">
+                                            <h3 class="product-box--title"><a href="#">گوشی موبایل آنر مدل 50 Lite دو
+                                                سیم
                                                 کارت ظرفیت 128گیگابایت و رم 6 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">5%</div>
-                                            <div class="product-box--price">
+                                            <div class="product-box--price-container">
+                                                <div class="product-box--price-discount">5%</div>
+                                                <div class="product-box--price">
                                                 <span class="product-box--price-now">
                                                     <div class="product-box--price-value">5,145,000</div>
                                                     <div class="product-box--price-currency">تومان</div>
                                                 </span>
-                                                <span class="product-box--price-old">5,399,000</span>
+                                                    <span class="product-box--price-old">5,399,000</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
+                                            <div class="product-box--action">
+                                                <a href="#"
+                                                   class="product-box--action-btn product-box--action-wishlist"><i
+                                                        class="fas fa-heart"></i></a>
+                                                <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
+                                                    سبد</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="../assets/images/products/06.jpg" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل هوآوی مدل nova Y70 دو
+                                <div class="swiper-slide">
+                                    <div class="product-box">
+                                        <div class="product-box--thumbnail-container">
+                                            <span class="product-box--specialSell"></span>
+                                            <img src="../assets/images/products/06.jpg" class="product-box--thumbnail"
+                                                 alt="product title">
+                                            <a href="#" class="product-box--link"></a>
+                                        </div>
+                                        <div class="product-box--detail">
+                                            <h3 class="product-box--title"><a href="#">گوشی موبایل هوآوی مدل nova Y70 دو
                                                 سیم‌ کارت ظرفیت 128 گیگابایت و رم 4 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">6%</div>
-                                            <div class="product-box--price">
+                                            <div class="product-box--price-container">
+                                                <div class="product-box--price-discount">6%</div>
+                                                <div class="product-box--price">
                                                 <span class="product-box--price-now">
                                                     <div class="product-box--price-value">3,949,000</div>
                                                     <div class="product-box--price-currency">تومان</div>
                                                 </span>
-                                                <span class="product-box--price-old">4,210,000</span>
+                                                    <span class="product-box--price-old">4,210,000</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
+                                            <div class="product-box--action">
+                                                <a href="#"
+                                                   class="product-box--action-btn product-box--action-wishlist"><i
+                                                        class="fas fa-heart"></i></a>
+                                                <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
+                                                    سبد</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="../assets/images/products/07.jpg" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل جی پلاس مدل Q20 دو سیم
+                                <div class="swiper-slide">
+                                    <div class="product-box">
+                                        <div class="product-box--thumbnail-container">
+                                            <span class="product-box--specialSell"></span>
+                                            <img src="../assets/images/products/07.jpg" class="product-box--thumbnail"
+                                                 alt="product title">
+                                            <a href="#" class="product-box--link"></a>
+                                        </div>
+                                        <div class="product-box--detail">
+                                            <h3 class="product-box--title"><a href="#">گوشی موبایل جی پلاس مدل Q20 دو
+                                                سیم
                                                 کارت ظرفیت 64 گیگابایت و رم 4 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">3%</div>
-                                            <div class="product-box--price">
+                                            <div class="product-box--price-container">
+                                                <div class="product-box--price-discount">3%</div>
+                                                <div class="product-box--price">
                                                 <span class="product-box--price-now">
                                                     <div class="product-box--price-value">3,299,000</div>
                                                     <div class="product-box--price-currency">تومان</div>
                                                 </span>
-                                                <span class="product-box--price-old">3,399,000</span>
+                                                    <span class="product-box--price-old">3,399,000</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
+                                            <div class="product-box--action">
+                                                <a href="#"
+                                                   class="product-box--action-btn product-box--action-wishlist"><i
+                                                        class="fas fa-heart"></i></a>
+                                                <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
+                                                    سبد</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="../assets/images/products/08.jpg" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل شیائومی مدل Redmi Note
+                                <div class="swiper-slide">
+                                    <div class="product-box">
+                                        <div class="product-box--thumbnail-container">
+                                            <span class="product-box--specialSell"></span>
+                                            <img src="../assets/images/products/08.jpg" class="product-box--thumbnail"
+                                                 alt="product title">
+                                            <a href="#" class="product-box--link"></a>
+                                        </div>
+                                        <div class="product-box--detail">
+                                            <h3 class="product-box--title"><a href="#">گوشی موبایل شیائومی مدل Redmi
+                                                Note
                                                 11S 2201117SG دو سیم کارت ظرفیت 128 گیگابایت و رم 6 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">2%</div>
-                                            <div class="product-box--price">
+                                            <div class="product-box--price-container">
+                                                <div class="product-box--price-discount">2%</div>
+                                                <div class="product-box--price">
                                                 <span class="product-box--price-now">
                                                     <div class="product-box--price-value">6,599,000</div>
                                                     <div class="product-box--price-currency">تومان</div>
                                                 </span>
-                                                <span class="product-box--price-old">6,735,000</span>
+                                                    <span class="product-box--price-old">6,735,000</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
+                                            <div class="product-box--action">
+                                                <a href="#"
+                                                   class="product-box--action-btn product-box--action-wishlist"><i
+                                                        class="fas fa-heart"></i></a>
+                                                <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
+                                                    سبد</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="../assets/images/products/01.jpg" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل هوآوی مدل nova 9 NAM-LX9
+                                <div class="swiper-slide">
+                                    <div class="product-box">
+                                        <div class="product-box--thumbnail-container">
+                                            <span class="product-box--specialSell"></span>
+                                            <img src="../assets/images/products/01.jpg" class="product-box--thumbnail"
+                                                 alt="product title">
+                                            <a href="#" class="product-box--link"></a>
+                                        </div>
+                                        <div class="product-box--detail">
+                                            <h3 class="product-box--title"><a href="#">گوشی موبایل هوآوی مدل nova 9
+                                                NAM-LX9
                                                 دو سیم کارت ظرفیت 128گیگابایت و 8 گیگابایت رم</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">6%</div>
-                                            <div class="product-box--price">
+                                            <div class="product-box--price-container">
+                                                <div class="product-box--price-discount">6%</div>
+                                                <div class="product-box--price">
                                                 <span class="product-box--price-now">
                                                     <div class="product-box--price-value">10,359,000</div>
                                                     <div class="product-box--price-currency">تومان</div>
                                                 </span>
-                                                <span class="product-box--price-old">10,990,000</span>
+                                                    <span class="product-box--price-old">10,990,000</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
+                                            <div class="product-box--action">
+                                                <a href="#"
+                                                   class="product-box--action-btn product-box--action-wishlist"><i
+                                                        class="fas fa-heart"></i></a>
+                                                <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
+                                                    سبد</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="../assets/images/products/02.jpg" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل نوکیا مدل 2017 3310 FA دو
+                                <div class="swiper-slide">
+                                    <div class="product-box">
+                                        <div class="product-box--thumbnail-container">
+                                            <span class="product-box--specialSell"></span>
+                                            <img src="../assets/images/products/02.jpg" class="product-box--thumbnail"
+                                                 alt="product title">
+                                            <a href="#" class="product-box--link"></a>
+                                        </div>
+                                        <div class="product-box--detail">
+                                            <h3 class="product-box--title"><a href="#">گوشی موبایل نوکیا مدل 2017 3310
+                                                FA دو
                                                 سیم کارت ظرفیت 16 مگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">8%</div>
-                                            <div class="product-box--price">
+                                            <div class="product-box--price-container">
+                                                <div class="product-box--price-discount">8%</div>
+                                                <div class="product-box--price">
                                                 <span class="product-box--price-now">
                                                     <div class="product-box--price-value">1,620,000</div>
                                                     <div class="product-box--price-currency">تومان</div>
                                                 </span>
-                                                <span class="product-box--price-old">1,766,000</span>
+                                                    <span class="product-box--price-old">1,766,000</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
+                                            <div class="product-box--action">
+                                                <a href="#"
+                                                   class="product-box--action-btn product-box--action-wishlist"><i
+                                                        class="fas fa-heart"></i></a>
+                                                <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
+                                                    سبد</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="../assets/images/products/03.jpg" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل آنر مدل X9 5G دو سیم کارت
+                                <div class="swiper-slide">
+                                    <div class="product-box">
+                                        <div class="product-box--thumbnail-container">
+                                            <span class="product-box--specialSell"></span>
+                                            <img src="../assets/images/products/03.jpg" class="product-box--thumbnail"
+                                                 alt="product title">
+                                            <a href="#" class="product-box--link"></a>
+                                        </div>
+                                        <div class="product-box--detail">
+                                            <h3 class="product-box--title"><a href="#">گوشی موبایل آنر مدل X9 5G دو سیم
+                                                کارت
                                                 ظرفیت 256 گیگابایت و رم 8 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">5%</div>
-                                            <div class="product-box--price">
+                                            <div class="product-box--price-container">
+                                                <div class="product-box--price-discount">5%</div>
+                                                <div class="product-box--price">
                                                 <span class="product-box--price-now">
                                                     <div class="product-box--price-value">7,959,000</div>
                                                     <div class="product-box--price-currency">تومان</div>
                                                 </span>
-                                                <span class="product-box--price-old">8,399,000</span>
+                                                    <span class="product-box--price-old">8,399,000</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
+                                            <div class="product-box--action">
+                                                <a href="#"
+                                                   class="product-box--action-btn product-box--action-wishlist"><i
+                                                        class="fas fa-heart"></i></a>
+                                                <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
+                                                    سبد</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="../assets/images/products/04.jpg" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل موتورولا مدل MOTO E40
+                                <div class="swiper-slide">
+                                    <div class="product-box">
+                                        <div class="product-box--thumbnail-container">
+                                            <span class="product-box--specialSell"></span>
+                                            <img src="../assets/images/products/04.jpg" class="product-box--thumbnail"
+                                                 alt="product title">
+                                            <a href="#" class="product-box--link"></a>
+                                        </div>
+                                        <div class="product-box--detail">
+                                            <h3 class="product-box--title"><a href="#">گوشی موبایل موتورولا مدل MOTO E40
                                                 XT2159-3 دو سیم کارت ظرفیت 64 گیگابایت و رم 4 گیگابای</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">3%</div>
-                                            <div class="product-box--price">
+                                            <div class="product-box--price-container">
+                                                <div class="product-box--price-discount">3%</div>
+                                                <div class="product-box--price">
                                                 <span class="product-box--price-now">
                                                     <div class="product-box--price-value">3,689,000</div>
                                                     <div class="product-box--price-currency">تومان</div>
                                                 </span>
-                                                <span class="product-box--price-old">3,799,000</span>
+                                                    <span class="product-box--price-old">3,799,000</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
+                                            <div class="product-box--action">
+                                                <a href="#"
+                                                   class="product-box--action-btn product-box--action-wishlist"><i
+                                                        class="fas fa-heart"></i></a>
+                                                <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
+                                                    سبد</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
                         </div>
-                        <!-- Add Arrows -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
-                </section>
-            </div>
-                    </div>
+                    </section>
                 </div>
-        </main>
-        <!-- end Page Content -->
+            </div>
+        </div>
+    </main>
+    <!-- end Page Content -->
 
-        <!-- shareLinkModal -->
-        <div class="modal fade" id="shareLinkModal" tabindex="-1" aria-labelledby="shareLinkModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="shareLinkModalLabel">اشتراک‌گذاری</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+    <!-- shareLinkModal -->
+    <div class="modal fade" id="shareLinkModal" tabindex="-1" aria-labelledby="shareLinkModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="shareLinkModalLabel">اشتراک‌گذاری</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted">با استفاده از روش‌های زیر می‌توانید این صفحه را با دوستان خود به اشتراک
+                        بگذارید.</p>
+                    <div class="social py-3">
+                        <ul>
+                            <li>
+                                <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" class="telegram"><i class="fab fa-telegram-plane"></i></a>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="modal-body">
-                        <p class="text-muted">با استفاده از روش‌های زیر می‌توانید این صفحه را با دوستان خود به اشتراک
-                            بگذارید.</p>
-                        <div class="social py-3">
-                            <ul>
-                                <li>
-                                    <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="telegram"><i class="fab fa-telegram-plane"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <span class="d-block font-weight-bold mb-1">لینک کوتاه</span>
-                        <div class="form-element-row mb-0">
-                            <input type="text" class="input-element dir-ltr text-sm"
-                                value="https://www.rtl-theme.com/?p=171652">
-                        </div>
-                        <div class="py-4">
-                            <hr>
-                            <div class="pt-3">
-                                <h6>جایزه شما</h6>
-                                <p class="text-muted mb-2">با دعوت دوستانتان، پس از اولین خریدشان، کدتخفیف و امتیاز هدیه
-                                    بگیرید.
-                                </p>
-                                <a href="#" class="btn btn-sm btn-outline-danger">دریافت کد تخفیف</a>
-                            </div>
+                    <span class="d-block font-weight-bold mb-1">لینک کوتاه</span>
+                    <div class="form-element-row mb-0">
+                        <input type="text" class="input-element dir-ltr text-sm"
+                               value="https://www.rtl-theme.com/?p=171652">
+                    </div>
+                    <div class="py-4">
+                        <hr>
+                        <div class="pt-3">
+                            <h6>جایزه شما</h6>
+                            <p class="text-muted mb-2">با دعوت دوستانتان، پس از اولین خریدشان، کدتخفیف و امتیاز هدیه
+                                بگیرید.
+                            </p>
+                            <a href="#" class="btn btn-sm btn-outline-danger">دریافت کد تخفیف</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- end shareLinkModal -->
+    </div>
+    <!-- end shareLinkModal -->
 
-        <!-- chartModal -->
-        <div class="modal fade" id="chartModal" tabindex="-1" aria-labelledby="chartModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="chartModalLabel">
-                            نمودار قیمت فروش
-                            <p class="text-muted text-sm">گوشی موبایل سامسونگ مدل Galaxy A30s SM-A307FN/DS دو سیم کارت
-                                ظرفیت 32 گیگابایت</p>
-                        </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="chart" style="height:350px"></div>
-                    </div>
+    <!-- chartModal -->
+    <div class="modal fade" id="chartModal" tabindex="-1" aria-labelledby="chartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="chartModalLabel">
+                        نمودار قیمت فروش
+                        <p class="text-muted text-sm">گوشی موبایل سامسونگ مدل Galaxy A30s SM-A307FN/DS دو سیم کارت
+                            ظرفیت 32 گیگابایت</p>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="chart" style="height:350px"></div>
                 </div>
             </div>
         </div>
-        <!-- end chartModal -->
+    </div>
+    <!-- end chartModal -->
 
 
 
@@ -1222,37 +1244,37 @@
 
 
 
-    <!-- JS Global Compulsory -->
-    <script src="{% static '/js/jquery-3.5.1.min.js' %}"></script>
-    <script src="{% static '/js/plugins/popper.min.js' %}"></script>
-    <script src="{% static '/bootstrap/js/bootstrap.min.js' %}"></script>
-    <!-- JS Implementing Plugins -->
-    <script src="{% static '/js/plugins/apexcharts.min.js' %}"></script>
-    <script src="{% static '/js/plugins/jquery.knob.js' %}"></script>
-    <script src="{% static '/js/plugins/jquery.throttle.js' %}"></script>
-    <script src="{% static '/js/plugins/jquery.classycountdown.min.js' %}"></script>
-    <script src="{% static '/js/plugins/jquery.nicescroll.min.js' %}"></script>
-    <script src="{% static '/js/plugins/nouislider.min.js' %}"></script>
-    <script src="{% static '/js/plugins/sweetalert2.all.min.js' %}"></script>
-    <script src="{% static '/js/plugins/select2.full.min.js' %}"></script>
-    <script src="{% static '/js/plugins/swiper.min.js' %}"></script>
-    <script src="{% static '/js/plugins/ResizeSensor.min.js' %}"></script>
-    <script src="{% static '/js/plugins/theia-sticky-sidebar.min.js' %}"></script>
-    <script src="{% static '/js/plugins/zoomsl.min.js' %}"></script>
-    <script src="{% static '/js/plugins/wNumb.js' %}"></script>
-    <!-- JS Template -->
-    <script src="{% static '/js/theme.js' %}"></script>
-    <!-- Here goes your custom.js -->
-    <script src="{% static '/js/custom.js' %}"></script>
+<!-- JS Global Compulsory -->
+<script src="{% static '/js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static '/js/plugins/popper.min.js' %}"></script>
+<script src="{% static '/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- JS Implementing Plugins -->
+<script src="{% static '/js/plugins/apexcharts.min.js' %}"></script>
+<script src="{% static '/js/plugins/jquery.knob.js' %}"></script>
+<script src="{% static '/js/plugins/jquery.throttle.js' %}"></script>
+<script src="{% static '/js/plugins/jquery.classycountdown.min.js' %}"></script>
+<script src="{% static '/js/plugins/jquery.nicescroll.min.js' %}"></script>
+<script src="{% static '/js/plugins/nouislider.min.js' %}"></script>
+<script src="{% static '/js/plugins/sweetalert2.all.min.js' %}"></script>
+<script src="{% static '/js/plugins/select2.full.min.js' %}"></script>
+<script src="{% static '/js/plugins/swiper.min.js' %}"></script>
+<script src="{% static '/js/plugins/ResizeSensor.min.js' %}"></script>
+<script src="{% static '/js/plugins/theia-sticky-sidebar.min.js' %}"></script>
+<script src="{% static '/js/plugins/zoomsl.min.js' %}"></script>
+<script src="{% static '/js/plugins/wNumb.js' %}"></script>
+<!-- JS Template -->
+<script src="{% static '/js/theme.js' %}"></script>
+<!-- Here goes your custom.js -->
+<script src="{% static '/js/custom.js' %}"></script>
 
-    <script>
-        var options = {
-            series: [{
-                name: "رنگ آبی",
-                data: [2304500, 2420000, 2448000, 2557000, 2668500, 2724000,
-                    2847000, 2935500
-                ]
-            },
+<script>
+    var options = {
+        series: [{
+            name: "رنگ آبی",
+            data: [2304500, 2420000, 2448000, 2557000, 2668500, 2724000,
+                2847000, 2935500
+            ]
+        },
             {
                 name: "رنگ مشکی",
                 data: [2354500, 2620000, 2648000, 2720000, 2848500, 2874000,
@@ -1265,29 +1287,29 @@
                     2925000, 2974000
                 ]
             }
+        ],
+        chart: {
+            id: 'fb',
+            group: 'social',
+            type: 'line',
+            height: 350
+        },
+        colors: ['#2962ff', '#000', '#c99212'],
+        xaxis: {
+            categories: ['01 اسفند', '02 اسفند', '03 اسفند', '04 اسفند', '05 اسفند', '06 اسفند', '07 اسفند',
+                '08 اسفند',
+                '09 اسفند',
+                '10 اسفند', '11 اسفند', '12 اسفند'
             ],
-            chart: {
-                id: 'fb',
-                group: 'social',
-                type: 'line',
-                height: 350
-            },
-            colors: ['#2962ff', '#000', '#c99212'],
-            xaxis: {
-                categories: ['01 اسفند', '02 اسفند', '03 اسفند', '04 اسفند', '05 اسفند', '06 اسفند', '07 اسفند',
-                    '08 اسفند',
-                    '09 اسفند',
-                    '10 اسفند', '11 اسفند', '12 اسفند'
-                ],
-            },
-            tooltip: {
-                y: [{
-                    title: {
-                        formatter: function (val) {
-                            return val + ":" + " تومان"
-                        }
+        },
+        tooltip: {
+            y: [{
+                title: {
+                    formatter: function (val) {
+                        return val + ":" + " تومان"
                     }
-                },
+                }
+            },
                 {
                     title: {
                         formatter: function (val) {
@@ -1302,25 +1324,25 @@
                         }
                     }
                 }
-                ]
-            },
-            grid: {
-                borderColor: '#f1f1f1',
-            },
-            yaxis: {
-                labels: {
-                    minWidth: 40,
-                    align: 'left',
-                    offsetX: 40,
-                }
+            ]
+        },
+        grid: {
+            borderColor: '#f1f1f1',
+        },
+        yaxis: {
+            labels: {
+                minWidth: 40,
+                align: 'left',
+                offsetX: 40,
             }
-        };
+        }
+    };
 
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
-    </script>
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>
 

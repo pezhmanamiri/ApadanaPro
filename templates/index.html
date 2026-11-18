@@ -3,805 +3,497 @@
 
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block title %}
-صفحه اصلی | آپادانا
+    صفحه اصلی | آپادانا
 {% endblock %}
 
 {% block content %}
 
-        <!-- Page Content -->
-        <main class="page-content">
-            <div class="swiper main-swiper-slider mb-4">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide main-slider-item">
-                        <a href="#" class="d-md-block d-none"><img
-                                src="{% static '/images/main-slider/full-width/slider-1.jpg' %}" alt=""></a>
-                        <a href="#" class="d-md-none"><img src="{% static '/images/main-slider/full-width/slider-mb-1.jpg' %}"
-                                alt=""></a>
-                    </div>
-                    <div class="swiper-slide main-slider-item">
-                        <a href="#" class="d-md-block d-none"><img
-                                src="{% static '/images/main-slider/full-width/slider-2.jpg' %}" alt=""></a>
-                        <a href="#" class="d-md-none"><img src="{% static '/images/main-slider/full-width/slider-mb-2.jpg' %}"
-                                alt=""></a>
-                    </div>
-                    <div class="swiper-slide main-slider-item">
-                        <a href="#" class="d-md-block d-none"><img
-                                src="{% static '/images/main-slider/full-width/slider-3.jpg' %}" alt=""></a>
-                        <a href="#" class="d-md-none"><img src="{% static '/images/main-slider/full-width/slider-mb-3.jpg' %}"
-                                alt=""></a>
-                    </div>
-                    <div class="swiper-slide main-slider-item">
-                        <a href="#" class="d-md-block d-none"><img
-                                src="{% static '/images/main-slider/full-width/slider-4.jpg' %}" alt=""></a>
-                        <a href="#" class="d-md-none"><img src="{% static '/images/main-slider/full-width/slider-mb-4.jpg' %}"
-                                alt=""></a>
-                    </div>
-                    <div class="swiper-slide main-slider-item">
-                        <a href="#" class="d-md-block d-none"><img
-                                src="{% static '/images/main-slider/full-width/slider-5.jpg' %}" alt=""></a>
-                        <a href="#" class="d-md-none"><img src="{% static '/images/main-slider/full-width/slider-mb-5.jpg' %}"
-                                alt=""></a>
+    <!-- Page Content -->
+    <main class="page-content">
+        <div class="swiper main-swiper-slider mb-4">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide main-slider-item">
+                    <a href="#" class="d-md-block d-none"><img
+                            src="{% static '/images/main-slider/full-width/slider-1.png' %}" alt=""></a>
+                    <a href="#" class="d-md-none"><img
+                            src="{% static '/images/main-slider/full-width/slider-mb-1.jpg' %}"
+                            alt=""></a>
+                </div>
+                <div class="swiper-slide main-slider-item">
+                    <a href="#" class="d-md-block d-none"><img
+                            src="{% static '/images/main-slider/full-width/slider-2.png' %}" alt=""></a>
+                    <a href="#" class="d-md-none"><img
+                            src="{% static '/images/main-slider/full-width/slider-mb-2.jpg' %}"
+                            alt=""></a>
+                </div>
+                <div class="swiper-slide main-slider-item">
+                    <a href="#" class="d-md-block d-none"><img
+                            src="{% static '/images/main-slider/full-width/slider-3.png' %}" alt=""></a>
+                    <a href="#" class="d-md-none"><img
+                            src="{% static '/images/main-slider/full-width/slider-mb-3.jpg' %}"
+                            alt=""></a>
+                </div>
+                <div class="swiper-slide main-slider-item">
+                    <a href="#" class="d-md-block d-none"><img
+                            src="{% static '/images/main-slider/full-width/slider-4.jpg' %}" alt=""></a>
+                    <a href="#" class="d-md-none"><img
+                            src="{% static '/images/main-slider/full-width/slider-mb-4.jpg' %}"
+                            alt=""></a>
+                </div>
+                <div class="swiper-slide main-slider-item">
+                    <a href="#" class="d-md-block d-none"><img
+                            src="{% static '/images/main-slider/full-width/slider-5.jpg' %}" alt=""></a>
+                    <a href="#" class="d-md-none"><img
+                            src="{% static '/images/main-slider/full-width/slider-mb-5.jpg' %}"
+                            alt=""></a>
+                </div>
+            </div>
+
+            <div class="swiper_pagination-navigation-custom">
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <div class="swiper-navigation-container d-md-flex d-none">
+                    <!-- If we need navigation buttons -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center mb-4">
+                <div class="col-lg-4 order-2 order-lg-1">
+                    <div class="row mt-4 mt-lg-0">
+                        <div class="col-lg-12 col-sm-6 col-12">
+                            <div class="banner mb-4">
+                                <a href="#">
+                                    <img src="{% static '/images/banner/banner-md-05.gif' %}" alt="banner">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-6 col-12">
+                            <div class="banner">
+                                <a href="#">
+                                    <img src="{% static '/images/banner/banner-md-04.gif' %}" alt="banner">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="swiper_pagination-navigation-custom">
-                    <!-- If we need pagination -->
-                    <div class="swiper-pagination"></div>
+                <div class="col-lg-8 order-1 order-lg-2">
+                    <div class="offer-slider-wrapper">
+                        <div class="offer-slider-title">پیشنهاد شگفت انگیز</div>
+                        <div class="row">
+                            <div class="col-12 mb-1">
+                                <div class="swiper-container offer-slider">
+                                    <div class="swiper-wrapper">
 
-                    <div class="swiper-navigation-container d-md-flex d-none">
-                        <!-- If we need navigation buttons -->
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
+                                        {% for product in offer_products %}
+                                            {% with product_image=product.images.all|first %}
+
+                                                <div class="swiper-slide">
+                                                    <div class="row align-items-center pb-3">
+
+                                                        <div class="col-sm-6 col-12 order-2 order-sm-1">
+                                                            <div class="product-title">
+                                                                <a href="{% url 'product_detail' slug=product.slug %}">
+                                                                    {{ product.name }}
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="product-price">
+                                                                <del>
+                                                                    {{ product.price|intcomma }} ریال
+                                                                </del>
+                                                                {{ product.discount_price|intcomma }} ریال
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-6 col-12 order-1 order-sm-2">
+                                                            <div class="offer-slide-content">
+                                                                <div class="product-thumbnail">
+                                                                    <a href="{% url 'product_detail' slug=product.slug %}">
+
+                                                                        {% if product_image %}
+                                                                            <img src="{{ product_image.image.url }}"
+                                                                                 alt="{{ product.name }}">
+                                                                        {% endif %}
+
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            {% endwith %}
+                                        {% empty %}
+                                            <div class="swiper-slide">
+                                                <div class="row align-items-center pb-3">
+                                                    <div class="col-12 text-center">
+                                                        در حال حاضر پیشنهاد شگفت‌انگیزی وجود ندارد.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-items-center pb-4">
+                            <div class="col-lg-8 mt-2 mb-4 mb-lg-0">
+                                <div class="offer-slider-thumbs-wrapper">
+                                    <div class="px-0 px-sm-5">
+                                        <div class="swiper-container offer-slider-thumbs">
+                                            <div class="swiper-wrapper">
+
+                                                {% for product in offer_products %}
+                                                    {% with product_image=product.images.all|first %}
+
+                                                        <div class="swiper-slide">
+                                                            {% if product_image %}
+                                                                <img src="{{ product_image.image.url }}"
+                                                                     alt="{{ product.name }}">
+                                                            {% endif %}
+                                                        </div>
+
+                                                    {% endwith %}
+                                                {% endfor %}
+
+                                            </div>
+
+                                            <!-- Add Pagination -->
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Add Arrows -->
+                                    <div class="offer-slider-button-next">
+                                        <i class="far fa-chevron-left"></i>
+                                    </div>
+
+                                    <div class="offer-slider-button-prev">
+                                        <i class="far fa-chevron-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="d-flex justify-content-center">
+                                    <div id="countdown--offer-slider"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <section class="product-carousel in-box">
+                <div class="section-title">
+                    <i class="fad fa-percentage"></i>
+                    منتخب محصولات تخفیف و حراج
+                </div>
+
+                <div class="swiper-container slider-lg pb-0">
+                    <div class="swiper-wrapper">
+
+                        {% for product in discounted_products %}
+                            {% with product_image=product.images.all|first %}
+
+                                <div class="swiper-slide">
+                                    <div class="product-box">
+
+                                        <div class="product-box--thumbnail-container">
+                                            <span class="product-box--specialSell"></span>
+
+                                            {% if product_image %}
+                                                <img src="{{ product_image.image.url }}"
+                                                     class="product-box--thumbnail"
+                                                     alt="{{ product_image.alt_text|default:product.name }}">
+                                            {% endif %}
+
+                                            <a href="{% url 'product_detail' product.slug %}"
+                                               class="product-box--link"></a>
+                                        </div>
+
+                                        <div class="product-box--detail">
+
+                                            <h3 class="product-box--title">
+                                                <a href="{% url 'product_detail' product.slug %}">
+                                                    {{ product.name }}
+                                                </a>
+                                            </h3>
+
+                                            <div class="product-box--price-container">
+
+                                                <div class="product-box--price-discount">
+                                                    {{ product.discount_percent|floatformat:0 }}%
+                                                </div>
+
+                                                <div class="product-box--price">
+
+                                <span class="product-box--price-now">
+                                    <div class="product-box--price-value">
+                                        {{ product.discount_price|intcomma }}
+                                    </div>
+
+                                    <div class="product-box--price-currency">
+                                        ریال
+                                    </div>
+                                </span>
+
+                                                    <span class="product-box--price-old">
+                                    {{ product.price|intcomma }}
+                                </span>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="product-box--action">
+
+                                                <form method="post"
+                                                      action="{% url 'add_to_favorites' product.id %}">
+                                                    {% csrf_token %}
+
+                                                    <button type="submit"
+                                                            class="product-box--action-btn product-box--action-wishlist">
+                                                        <i class="fas fa-heart"></i>
+                                                    </button>
+                                                </form>
+
+                                                <form method="post"
+                                                      action="{% url 'add_to_cart' product.id %}">
+                                                    {% csrf_token %}
+
+                                                    <input type="hidden" name="quantity" value="1">
+
+                                                    <button type="submit"
+                                                            class="product-box--action-btn product-box--action-cart">
+                                                        اضافه سبد
+                                                    </button>
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endwith %}
+
+                        {% empty %}
+
+                            <div class="swiper-slide">
+                                <div class="product-box">
+                                    <div class="product-box--detail">
+                                        <h3 class="product-box--title">
+                                            در حال حاضر محصول تخفیف‌داری موجود نیست.
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                </div>
+            </section>
+
+            <div class="row mb-4">
+
+                <!-- ابزارآلات -->
+                <div class="col-md-3 col-6 mb-lg-0 mb-3">
+                    <div class="banner">
+                        <a href="{% url 'products' %}?category=bzrlt">
+                            <img src="{% static '/images/banner/banner-sm-01.jpg' %}" alt="ابزارآلات">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- لوازم برقی -->
+                <div class="col-md-3 col-6 mb-lg-0 mb-3">
+                    <div class="banner">
+                        <a href="{% url 'products' %}?category=barghi">
+                            <img src="{% static '/images/banner/banner-sm-02.jpg' %}" alt="لوازم برقی">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- محصولات پلاسکو -->
+                <div class="col-md-3 col-6 mb-lg-0 mb-3">
+                    <div class="banner">
+                        <a href="{% url 'products' %}?category=lso">
+                            <img src="{% static '/images/banner/banner-sm-03.jpg' %}" alt="پلاسکو">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- مبلمان و لوازم خوابگاهی -->
+                <div class="col-md-3 col-6 mb-lg-0 mb-3">
+                    <div class="banner">
+                        <a href="{% url 'products' %}?category=mblmn">
+                            <img src="{% static '/images/banner/banner-sm-04.jpg' %}" alt="مبلمان">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <section class="product-carousel in-box">
+                <div class="section-title">
+                    <i class="fad fa-fire"></i>
+                    پرفروش ترینها
+                </div>
+
+                <div class="swiper-container slider-lg pb-0">
+                    <div class="swiper-wrapper">
+
+                        {% for product in best_selling_products %}
+                            <div class="swiper-slide">
+                                <div class="product-box">
+
+                                    <div class="product-box--thumbnail-container">
+
+                                        <span class="product-box--specialSell"></span>
+
+                                        {% with product_image=product.images.all|first %}
+                                            {% if product_image %}
+                                                <img src="{{ product_image.image.url }}"
+                                                     class="product-box--thumbnail"
+                                                     alt="{{ product.name }}">
+                                            {% else %}
+                                                <img src="{% static '/images/products/01.jpg' %}"
+                                                     class="product-box--thumbnail"
+                                                     alt="{{ product.name }}">
+                                            {% endif %}
+                                        {% endwith %}
+
+                                        <a href="{% url 'product_detail' product.slug %}"
+                                           class="product-box--link"></a>
+
+                                    </div>
+
+                                    <div class="product-box--detail">
+
+                                        <h3 class="product-box--title">
+                                            <a href="{% url 'product_detail' product.slug %}">
+                                                {{ product.name }}
+                                            </a>
+                                        </h3>
+
+                                        <div class="product-box--price-container">
+
+                                            {% if product.discount_price and product.discount_price < product.price %}
+                                                <div class="product-box--price-discount">
+                                                    {{ product.discount_percent|floatformat:0 }}%
+                                                </div>
+                                            {% endif %}
+
+                                            <div class="product-box--price">
+
+                                    <span class="product-box--price-now">
+                                        <div class="product-box--price-value">
+                                            {% if product.discount_price and product.discount_price < product.price %}
+                                                {{ product.discount_price|floatformat:0|intcomma }}
+                                            {% else %}
+                                                {{ product.price|floatformat:0|intcomma }}
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="product-box--price-currency">
+                                            ریال
+                                        </div>
+                                    </span>
+
+                                                {% if product.discount_price and product.discount_price < product.price %}
+                                                    <span class="product-box--price-old">
+                                            {{ product.price|floatformat:0|intcomma }}
+                                        </span>
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+
+                                        <div class="product-box--action">
+
+                                            <form action="{% url 'add_to_favorites' product.id %}"
+                                                  method="post"
+                                                  style="display:inline;">
+                                                {% csrf_token %}
+                                                <button type="submit"
+                                                        class="product-box--action-btn product-box--action-wishlist">
+                                                    <i class="fas fa-heart"></i>
+                                                </button>
+                                            </form>
+
+                                            <form action="{% url 'add_to_cart' product.id %}"
+                                                  method="post"
+                                                  style="display:inline;">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="quantity" value="1">
+
+                                                <button type="submit"
+                                                        class="product-box--action-btn product-box--action-cart">
+                                                    اضافه سبد
+                                                </button>
+                                            </form>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+
+                            <div class="swiper-slide">
+                                <div class="product-box">
+                                    هنوز محصول پرفروشی ثبت نشده است.
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                </div>
+            </section>
+
+            <div class="row mb-4">
+                <div class="col-md-6 mb-lg-0 mb-3">
+                    <div class="banner">
+                        <a href="#">
+                            <img src="{% static '/images/banner/banner-md-01.jpg' %}" alt="banner">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-lg-0 mb-3">
+                    <div class="banner">
+                        <a href="#">
+                            <img src="{% static '/images/banner/banner-md-02.jpg' %}" alt="banner">
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row align-items-center mb-4">
-                    <div class="col-lg-4 order-2 order-lg-1">
-                        <div class="row mt-4 mt-lg-0">
-                            <div class="col-lg-12 col-sm-6 col-12">
-                                <div class="banner mb-4">
-                                    <a href="#">
-                                        <img src="{% static '/images/banner/banner-md-05.gif' %}" alt="banner">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-sm-6 col-12">
-                                <div class="banner">
-                                    <a href="#">
-                                        <img src="{% static '/images/banner/banner-md-04.gif' %}" alt="banner">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8 order-1 order-lg-2">
-                        <div class="offer-slider-wrapper">
-                            <div class="offer-slider-title">پیشنهاد شگفت انگیز</div>
-                            <div class="row">
-                                <div class="col-12 mb-1">
-                                    <div class="swiper-container offer-slider">
-                                        <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <div class="row align-items-center pb-3">
-                                                    <div class="col-sm-6 col-12 order-2 order-sm-1">
-                                                        <div class="product-title">
-                                                            <a href="#">
-                                                                گوشی موبایل سامسونگ مدل Galaxy Note10 Lite SM-N770F/DS
-                                                                دو سیم کارت ظرفیت 128 گیگابایت
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <del>13,699,000 تومان</del>
-                                                            13,250,000 تومان
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-12 order-1 order-sm-2">
-                                                        <div class="offer-slide-content">
-                                                            <div class="product-thumbnail">
-                                                                <a href="#">
-                                                                    <img src="{% static '/images/offer-slider/01.jpg' %}"
-                                                                        alt="item">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="row align-items-center pb-3">
-                                                    <div class="col-sm-6 col-12 order-2 order-sm-1">
-                                                        <div class="product-title">
-                                                            <a href="#">هدفون بی سیم سامسونگ مدل Galaxy Buds Live</a>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <del>2,988,000 تومان</del>
-                                                            2,450,000 تومان
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-12 order-1 order-sm-2">
-                                                        <div class="offer-slide-content">
-                                                            <div class="product-thumbnail">
-                                                                <a href="#">
-                                                                    <img src="{% static '/images/offer-slider/02.jpg' %}"
-                                                                        alt="item">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="row align-items-center pb-3">
-                                                    <div class="col-sm-6 col-12 order-2 order-sm-1">
-                                                        <div class="product-title">
-                                                            <a href="#">ساعت هوشمند سامسونگ مدل Galaxy Watch Active2
-                                                                44mm</a>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <del>5,650,000 تومان</del>
-                                                            5,020,000 تومان
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-12 order-1 order-sm-2">
-                                                        <div class="offer-slide-content">
-                                                            <div class="product-thumbnail">
-                                                                <a href="#">
-                                                                    <img src="{% static '/images/offer-slider/03.jpg' %}"
-                                                                        alt="item">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="row align-items-center pb-3">
-                                                    <div class="col-sm-6 col-12 order-2 order-sm-1">
-                                                        <div class="product-title">
-                                                            <a href="#">هدفون بی سیم مدل inpods 12</a>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <del>130,000 تومان</del>
-                                                            109,000 تومان
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-12 order-1 order-sm-2">
-                                                        <div class="offer-slide-content">
-                                                            <div class="product-thumbnail">
-                                                                <a href="#">
-                                                                    <img src="{% static '/images/offer-slider/04.jpg' %}"
-                                                                        alt="item">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <div class="row align-items-center pb-3">
-                                                    <div class="col-sm-6 col-12 order-2 order-sm-1">
-                                                        <div class="product-title">
-                                                            <a href="#">ساعت هوشمند سامسونگ مدل Galaxy Watch Active2
-                                                                44mm Leatherband Smart</a>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <del>6,299,000 تومان</del>
-                                                            5,999,000 تومان
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-12 order-1 order-sm-2">
-                                                        <div class="offer-slide-content">
-                                                            <div class="product-thumbnail">
-                                                                <a href="#">
-                                                                    <img src="{% static '/images/offer-slider/05.jpg' %}"
-                                                                        alt="item">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row align-items-center pb-4">
-                                <div class="col-lg-8 mt-2 mb-4 mb-lg-0">
-                                    <div class="offer-slider-thumbs-wrapper">
-                                        <div class="px-0 px-sm-5">
-                                            <div class="swiper-container offer-slider-thumbs">
-                                                <div class="swiper-wrapper">
-                                                    <div class="swiper-slide">
-                                                        <img src="{% static '/images/offer-slider/01.jpg' %}" alt="item">
-                                                    </div>
-                                                    <div class="swiper-slide">
-                                                        <img src="{% static '/images/offer-slider/02.jpg' %}" alt="item">
-                                                    </div>
-                                                    <div class="swiper-slide">
-                                                        <img src="{% static '/images/offer-slider/03.jpg' %}" alt="item">
-                                                    </div>
-                                                    <div class="swiper-slide">
-                                                        <img src="{% static '/images/offer-slider/04.jpg' %}" alt="item">
-                                                    </div>
-                                                    <div class="swiper-slide">
-                                                        <img src="{% static '/images/offer-slider/05.jpg' %}" alt="item">
-                                                    </div>
-                                                </div>
-                                                <!-- Add Pagination -->
-                                                <div class="swiper-pagination"></div>
-                                            </div>
-                                        </div>
-                                        <!-- Add Arrows -->
-                                        <div class="offer-slider-button-next"><i class="far fa-chevron-left"></i></div>
-                                        <div class="offer-slider-button-prev"><i class="far fa-chevron-right"></i></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="d-flex justify-content-center">
-                                        <div id="countdown--offer-slider"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <section class="product-carousel in-box">
-                    <div class="section-title">
-                        <i class="fad fa-percentage"></i>
-                        منتخب محصولات تخفیف و حراج
-                    </div>
-                    <div class="swiper-container slider-lg pb-0">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/01.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل هوآوی مدل nova 9 NAM-LX9
-                                                دو سیم کارت ظرفیت 128گیگابایت و 8 گیگابایت رم</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">6%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">10,359,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">10,990,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/02.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل نوکیا مدل 2017 3310 FA دو
-                                                سیم کارت ظرفیت 16 مگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">8%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">1,620,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">1,766,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/03.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل آنر مدل X9 5G دو سیم کارت
-                                                ظرفیت 256 گیگابایت و رم 8 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">5%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">7,959,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">8,399,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/04.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل موتورولا مدل MOTO E40
-                                                XT2159-3 دو سیم کارت ظرفیت 64 گیگابایت و رم 4 گیگابای</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">3%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">3,689,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">3,799,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/05.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل آنر مدل 50 Lite دو سیم
-                                                کارت ظرفیت 128گیگابایت و رم 6 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">5%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">5,145,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">5,399,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/06.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل هوآوی مدل nova Y70 دو
-                                                سیم‌ کارت ظرفیت 128 گیگابایت و رم 4 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">6%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">3,949,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">4,210,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/07.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل جی پلاس مدل Q20 دو سیم
-                                                کارت ظرفیت 64 گیگابایت و رم 4 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">3%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">3,299,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">3,399,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/08.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل شیائومی مدل Redmi Note
-                                                11S 2201117SG دو سیم کارت ظرفیت 128 گیگابایت و رم 6 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">2%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">6,599,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">6,735,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Add Arrows -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
-                </section>
-                <div class="row mb-4">
-                    <div class="col-md-3 col-6 mb-lg-0 mb-3">
-                        <div class="banner">
-                            <a href="#">
-                                <img src="{% static '/images/banner/banner-sm-01.jpg' %}" alt="banner">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6 mb-lg-0 mb-3">
-                        <div class="banner">
-                            <a href="#">
-                                <img src="{% static '/images/banner/banner-sm-02.jpg' %}" alt="banner">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6 mb-lg-0 mb-3">
-                        <div class="banner">
-                            <a href="#">
-                                <img src="{% static '/images/banner/banner-sm-03.jpg' %}" alt="banner">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-3  col-6 mb-lg-0 mb-3">
-                        <div class="banner">
-                            <a href="#">
-                                <img src="{% static '/images/banner/banner-sm-04.jpg' %}" alt="banner">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <section class="product-carousel in-box">
-                    <div class="section-title">
-                        <i class="fad fa-fire"></i>
-                        پرفروش ترینها
-                    </div>
-                    <div class="swiper-container slider-lg pb-0">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/05.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل آنر مدل 50 Lite دو سیم
-                                                کارت ظرفیت 128گیگابایت و رم 6 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">5%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">5,145,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">5,399,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/06.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل هوآوی مدل nova Y70 دو
-                                                سیم‌ کارت ظرفیت 128 گیگابایت و رم 4 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">6%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">3,949,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">4,210,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/07.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل جی پلاس مدل Q20 دو سیم
-                                                کارت ظرفیت 64 گیگابایت و رم 4 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">3%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">3,299,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">3,399,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/08.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل شیائومی مدل Redmi Note
-                                                11S 2201117SG دو سیم کارت ظرفیت 128 گیگابایت و رم 6 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">2%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">6,599,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">6,735,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/01.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل هوآوی مدل nova 9 NAM-LX9
-                                                دو سیم کارت ظرفیت 128گیگابایت و 8 گیگابایت رم</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">6%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">10,359,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">10,990,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/02.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل نوکیا مدل 2017 3310 FA دو
-                                                سیم کارت ظرفیت 16 مگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">8%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">1,620,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">1,766,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/03.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل آنر مدل X9 5G دو سیم کارت
-                                                ظرفیت 256 گیگابایت و رم 8 گیگابایت</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">5%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">7,959,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">8,399,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="product-box">
-                                    <div class="product-box--thumbnail-container">
-                                        <span class="product-box--specialSell"></span>
-                                        <img src="{% static '/images/products/04.jpg' %}" class="product-box--thumbnail"
-                                             alt="product title">
-                                        <a href="#" class="product-box--link"></a>
-                                    </div>
-                                    <div class="product-box--detail">
-                                        <h3 class="product-box--title"><a href="#">گوشی موبایل موتورولا مدل MOTO E40
-                                                XT2159-3 دو سیم کارت ظرفیت 64 گیگابایت و رم 4 گیگابای</a></h3>
-                                        <div class="product-box--price-container">
-                                            <div class="product-box--price-discount">3%</div>
-                                            <div class="product-box--price">
-                                                <span class="product-box--price-now">
-                                                    <div class="product-box--price-value">3,689,000</div>
-                                                    <div class="product-box--price-currency">تومان</div>
-                                                </span>
-                                                <span class="product-box--price-old">3,799,000</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-box--action">
-                                            <a href="#" class="product-box--action-btn product-box--action-wishlist"><i
-                                                    class="fas fa-heart"></i></a>
-                                            <a href="#" class="product-box--action-btn product-box--action-cart">اضافه
-                                                سبد</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Add Arrows -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
-                </section>
-                <div class="row mb-4">
-                    <div class="col-md-6 mb-lg-0 mb-3">
-                        <div class="banner">
-                            <a href="#">
-                                <img src="{% static '/images/banner/banner-md-01.jpg' %}" alt="banner">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-lg-0 mb-3">
-                        <div class="banner">
-                            <a href="#">
-                                <img src="{% static '/images/banner/banner-md-02.jpg' %}" alt="banner">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-        <!-- end Page Content -->
+        </div>
+    </main>
+    <!-- end Page Content -->
 
 
 

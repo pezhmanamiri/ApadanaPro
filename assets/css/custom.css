@@ -1,0 +1,56 @@
+.product-box--action form {
+    display: inline-block;
+    margin: 0;
+}
+
+.product-box--action button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+
+
+
+
+
+.add-to-favorite {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+}
+
+
+
+
+
+
+
+
+/* گرد کردن تصویر اصلی اسلایدر پیشنهاد شگفت انگیز */
+.offer-slider .product-thumbnail img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+
+
+.product-box--action form {
+    display: inline;
+    margin: 0;
+}
+
+.product-box--action button {
+    cursor: pointer;
+}

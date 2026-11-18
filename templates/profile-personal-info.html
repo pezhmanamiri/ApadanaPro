@@ -1,223 +1,309 @@
 
-        <!-- Page Content -->
-        <main class="page-content">
-            <div class="container">
-                <div class="row mb-5">
-                    <div class="col-lg-3 col-md-4 mb-md-0 mb-3 sticky-sidebar">
-                        <div class="sidebar-widget">
-                            <div class="banner mb-3">
-                                <a href="#">
-                                    <img src="../assets/images/banner/banner-profile-sidebar.jpg"
-                                        class="box-shaow-unset has-border" alt="...">
-                                </a>
-                            </div>
-                            <div class="profile-sidebar shadow-around">
-                                <div class="profile-sidebar-header">
-                                    <div class="d-flex align-items-center">
-                                        <div class="profile-avatar">
-                                            <img src="../assets/images/avatar/avatar.png" alt="avatar">
-                                        </div>
-                                        <div class="profile-info">
-                                            <div class="d-block">
-                                                <h6><strong>جلال بهرامی راد</strong></h6>
-                                            </div>
-                                            <div class="d-block">
-                                                <strong class="text-muted">09xxxxxxxxx</strong>
-                                            </div>
-                                        </div>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Page Content -->
+<main class="page-content">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-3 col-md-4 mb-md-0 mb-3 sticky-sidebar">
+                <div class="sidebar-widget">
+                    <div class="banner mb-3">
+                        <a href="#">
+                            <img src="{% static 'images/banner/banner-profile-sidebar.jpg' %}"
+                                 class="box-shaow-unset has-border" alt="...">
+                        </a>
+                    </div>
+
+                    <div class="profile-sidebar shadow-around">
+                        <div class="profile-sidebar-header">
+                            <div class="d-flex align-items-center">
+                                <div class="profile-avatar">
+                                    <img src="{% static 'images/avatar/avatar.png' %}" alt="avatar">
+                                </div>
+
+                                <div class="profile-info">
+                                    <div class="d-block">
+                                        <h6>
+                                            <strong>
+                                                {{ request.user.get_full_name|default:request.user.username }}
+                                            </strong>
+                                        </h6>
                                     </div>
-                                    <div class="user-options">
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    <span>کیف پول</span>
-                                                    <span>2,500,000 <span
-                                                            class="text-info font-weight-bold">تومان</span></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <span>همتا کلاب</span>
-                                                    <span>0 <span
-                                                            class="text-info font-weight-bold">امتیاز</span></span>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                    <div class="d-block">
+                                        <strong class="text-muted">
+                                            {{ request.user.username }}
+                                        </strong>
                                     </div>
                                 </div>
-                                <div class="user-menu">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <i class="far fa-home"></i>
-                                                خلاصه فعالیت ها
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="far fa-clipboard-list-check"></i>
-                                                سفارش های من
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="far fa-heart"></i>
-                                                لیست علاقمندی
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="far fa-comment-alt-lines"></i>
-                                                نظرات
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="far fa-map-marked"></i>
-                                                نشانی ها
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="far fa-envelope"></i>
-                                                پیغام ها
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="far fa-clock"></i>
-                                                بازدیدهای اخیر
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="active">
-                                                <i class="far fa-user-cog"></i>
-                                                اطلاعات حساب
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="far fa-sign-in-alt"></i>
-                                                خروج
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                            </div>
+
+                            <div class="user-options">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <span>کیف پول</span>
+                                            <span>
+                                                0
+                                                <span class="text-info font-weight-bold">تومان</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span>همتا کلاب</span>
+                                            <span>
+                                                0
+                                                <span class="text-info font-weight-bold">امتیاز</span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-9 col-md-8">
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <div class="section-title mb-2">
-                                    اطلاعات شخصی
-                                </div>
-                                <section class="shadow-around p-3">
-                                    <form action="#">
-                                        <div class="row">
-                                            <div class="col-lg-6 mb-5">
-                                                <div class="text-sm text-muted mb-3">نام و نام خانوادگی:</div>
-                                                <div class="text-dark font-weight-bold">
-                                                    <div class="form-element-row mb-0">
-                                                        <input type="text" class="input-element"
-                                                            value="جلال بهرامی راد">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 mb-5">
-                                                <div class="text-sm text-muted mb-3">پست الکترونیک:</div>
-                                                <div class="text-dark font-weight-bold">
-                                                    <div class="form-element-row mb-0">
-                                                        <input type="text" class="input-element"
-                                                            value="example@example.com">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 mb-5">
-                                                <div class="text-sm text-muted mb-3">شماره تلفن همراه:</div>
-                                                <div class="text-dark font-weight-bold">
-                                                    <div class="form-element-row mb-0">
-                                                        <input type="text" class="input-element" value="09xxxxxxxxx">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 mb-5">
-                                                <div class="text-sm text-muted mb-3">کد ملی:</div>
-                                                <div class="text-dark font-weight-bold">
-                                                    <div class="form-element-row mb-0">
-                                                        <input type="text" class="input-element" value="-">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 mb-5">
-                                                <div class="text-sm text-muted mb-3">دریافت خبرنامه:</div>
-                                                <div class="text-dark font-weight-bold">
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="customRadioInline1"
-                                                            name="customRadioInline1" class="custom-control-input"
-                                                            checked>
-                                                        <label class="custom-control-label"
-                                                            for="customRadioInline1">خیر</label>
-                                                    </div>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="customRadioInline2"
-                                                            name="customRadioInline1" class="custom-control-input">
-                                                        <label class="custom-control-label"
-                                                            for="customRadioInline2">بله</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 mb-5">
-                                                <div class="text-sm text-muted mb-3">روش بازگشت وجه:</div>
-                                                <div class="text-dark font-weight-bold">
-                                                    -
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-element-row text-left">
-                                                    <button class="btn-element btn-success-element">
-                                                        <i class="fad fa-user-edit"></i>
-                                                        ذخیره تغییرات
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </section>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-5">
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
-                        <div class="banner">
-                            <a href="#">
-                                <img src="../assets/images/banner/banner-sm-01.jpg" alt="banner">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
-                        <div class="banner">
-                            <a href="#">
-                                <img src="../assets/images/banner/banner-sm-02.jpg" alt="banner">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
-                        <div class="banner">
-                            <a href="#">
-                                <img src="../assets/images/banner/banner-sm-03.jpg" alt="banner">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
-                        <div class="banner">
-                            <a href="#">
-                                <img src="../assets/images/banner/banner-sm-04.jpg" alt="banner">
-                            </a>
+
+                        <div class="user-menu">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-home"></i>
+                                        خلاصه فعالیت ها
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-clipboard-list-check"></i>
+                                        سفارش های من
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-heart"></i>
+                                        لیست علاقمندی
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-comment-alt-lines"></i>
+                                        نظرات
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-map-marked"></i>
+                                        نشانی ها
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-envelope"></i>
+                                        پیغام ها
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-clock"></i>
+                                        بازدیدهای اخیر
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="active">
+                                        <i class="far fa-user-cog"></i>
+                                        اطلاعات حساب
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="far fa-sign-in-alt"></i>
+                                        خروج
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-        <!-- end Page Content -->
+
+            <div class="col-lg-9 col-md-8">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="section-title mb-2">
+                            اطلاعات شخصی
+                        </div>
+
+                        <section class="shadow-around p-3">
+
+                            <form method="POST" action="">
+                                {% csrf_token %}
+
+                                <div class="row">
+
+                                    <div class="col-lg-6 mb-5">
+                                        <div class="text-sm text-muted mb-3">
+                                            نام و نام خانوادگی:
+                                        </div>
+                                        <div class="text-dark font-weight-bold">
+                                            <div class="form-element-row mb-0">
+                                                <input
+                                                    type="text"
+                                                    name="full_name"
+                                                    class="input-element"
+                                                    value="{{ full_name }}"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 mb-5">
+                                        <div class="text-sm text-muted mb-3">
+                                            پست الکترونیک:
+                                        </div>
+                                        <div class="text-dark font-weight-bold">
+                                            <div class="form-element-row mb-0">
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    class="input-element"
+                                                    value="{{ request.user.email }}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 mb-5">
+                                        <div class="text-sm text-muted mb-3">
+                                            شماره تلفن همراه:
+                                        </div>
+                                        <div class="text-dark font-weight-bold">
+                                            <div class="form-element-row mb-0">
+                                                <input
+                                                    type="text"
+                                                    class="input-element"
+                                                    value="{{ request.user.username }}"
+                                                    readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 mb-5">
+                                        <div class="text-sm text-muted mb-3">
+                                            کد ملی:
+                                        </div>
+                                        <div class="text-dark font-weight-bold">
+                                            <div class="form-element-row mb-0">
+                                                <input
+                                                    type="text"
+                                                    class="input-element"
+                                                    value="-"
+                                                    disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 mb-5">
+                                        <div class="text-sm text-muted mb-3">
+                                            دریافت خبرنامه:
+                                        </div>
+
+                                        <div class="text-dark font-weight-bold">
+
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input
+                                                    type="radio"
+                                                    id="customRadioInline1"
+                                                    name="newsletter"
+                                                    class="custom-control-input"
+                                                    disabled>
+                                                <label
+                                                    class="custom-control-label"
+                                                    for="customRadioInline1">
+                                                    خیر
+                                                </label>
+                                            </div>
+
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input
+                                                    type="radio"
+                                                    id="customRadioInline2"
+                                                    name="newsletter"
+                                                    class="custom-control-input"
+                                                    disabled>
+                                                <label
+                                                    class="custom-control-label"
+                                                    for="customRadioInline2">
+                                                    بله
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 mb-5">
+                                        <div class="text-sm text-muted mb-3">
+                                            روش بازگشت وجه:
+                                        </div>
+                                        <div class="text-dark font-weight-bold">
+                                            -
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-element-row text-left">
+                                            <button
+                                                type="submit"
+                                                class="btn-element btn-success-element">
+                                                <i class="fad fa-user-edit"></i>
+                                                ذخیره تغییرات
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
+                <div class="banner">
+                    <a href="#">
+                        <img src="{% static 'images/banner/banner-sm-01.jpg' %}" alt="banner">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
+                <div class="banner">
+                    <a href="#">
+                        <img src="{% static 'images/banner/banner-sm-02.jpg' %}" alt="banner">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
+                <div class="banner">
+                    <a href="#">
+                        <img src="{% static 'images/banner/banner-sm-03.jpg' %}" alt="banner">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6 mb-lg-0 mb-3">
+                <div class="banner">
+                    <a href="#">
+                        <img src="{% static 'images/banner/banner-sm-04.jpg' %}" alt="banner">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+<!-- end Page Content -->
+
+{% endblock %}
